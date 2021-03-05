@@ -38,7 +38,7 @@ textarea {
     }
 }
 
-@media (max-width: 485px){
+@media (max-width: 770px){
     #email-feedback{
         display: block;
     }

@@ -18,12 +18,13 @@
             <h1>Contact Me!</h1>
             <h2>You can expect a response in 2-3 working days</h2>          
         </div>
+
         <form action="/contact" method="POST">
             <div class="row">
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
                     <label for="firstName">First Name:</label>
                     <br>
-                    <input type="text" id ="firstName" name = "firstName "placeholder="First Name">
+                    <input type="text" id ="firstName" name = "firstName"placeholder="First Name">
                 </div>
                 <div class="col-12 col-sm-6 col-md-4 mb-3">
                     <label for="lastName">Last Name:</label>
@@ -50,7 +51,7 @@
                 <div class = "col-10 col-sm-8 mb-3">
                     <label for="subject">Inquiry:</label>
                     <br>
-                    <textarea name="inquiry" id="inquiry" cols="70" rows="5" placeholder="Enter your inquiry here..."></textarea>
+                    <textarea id="inquiry" name="inquiry" cols="70" rows="5" placeholder="Enter your inquiry here..."></textarea>
                 </div>
             </div>
             <button type="submit" class="btn btn-success">Submit form</button>
@@ -63,7 +64,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
         integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
         crossorigin="anonymous"></script>
-        
     <script src="/javascripts/validateForms.js"></script>
 </body>
 
@@ -71,3 +71,7 @@
 
 
 <!-- firstName, lastName, Email, Subject, Inquiry -->
+
+<!-- Type npm install express nodemailer nodemailer-mailgun-transport -S
+
+From here: https://www.youtube.com/watch?v=JpcLd5UrDOQ&ab_channel=EsterlingAccime -->

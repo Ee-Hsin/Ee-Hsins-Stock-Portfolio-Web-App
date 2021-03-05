@@ -9,9 +9,11 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
+const sendMail = require('./mail.js');
 
 const userRoutes = require('./routes/users');
 const portfolioRoutes = require('./routes/portfolio');
+const catchAsync = require("./utils/catchAsync");
 
 /*COMMANDS:
 1. Press CTRL+D while selecting something to select another one, and keep
@@ -112,10 +114,23 @@ app.get('/contact', (req, res) => {
     res.render('contact')
 });
 
-app.post('/contact', (req, res) => {
-    req.flash('success', 'Thank you for submitting an Inquiry, you can expect a response within 2-3 Working Days');
+app.post('/contact', catchAsync( async(req, res) => {
+    console.log('Data: ', req.body);
+    const {firstName, lastName, email, subject, inquiry} = req.body;
+    
+    const text = "From: "+ firstName + " " + lastName + "\nMessage is:\n" + inquiry;
+    await sendMail(email,subject,text, function (err,data) {
+        //This code inside does not work for some reason
+        if(err){
+            console.log("Email was not sent")
+            req.flash('error', 'Your email was not sent, as an error occured.');
+        } else {
+            req.flash('success', 'Thank you for submitting an Inquiry, I will try to respond within 2-3 Working Days');
+        }
+    });
+    req.flash('success', 'Thank you for submitting an Inquiry, if you gave a valid Email Address, you can expect a response within 2-3 Working Days');
     res.redirect('/portfolio');
-});
+}));
 
 //ERROR HANDLERS
 app.all('*', (req, res, next) => { //If someone goes to a path we didn't handle up there (and hence doesn't exist)
@@ -131,3 +146,5 @@ app.use((err, req, res, next) => {
 app.listen(3005, () => {
     console.log("LISTENING ON PORT 3005");
 })
+
+//Sort out the Form redirection, then do the .env file next with Key

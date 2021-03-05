@@ -20,7 +20,6 @@
 
 function validation() {
     const email = document.querySelector('#email');
-
     const pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
     email.addEventListener('input', function(){
