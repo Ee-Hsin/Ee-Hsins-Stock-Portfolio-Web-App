@@ -7,7 +7,12 @@
     <li>Avg Price: <%= stock.price %></li>
     <li>Units: <%= stock.units %></li>
     <li>Current Price: <%= currentPrice %></li>
-    <li>IV: <%= stock.IV %></li>
+    <% if(!currentUser) {%>
+    <li>IV (Intrinsic Value): *Login to view Intrinsic Value*</li>
+    <% } %> 
+    <% if(currentUser) {%>
+    <li>IV (Intrinsic Value): <%= stock.IV %></li>
+    <% } %> 
     <li>Category: <%= stock.category %></li>
     <li>Description: <%= stock.description %></li>
 </ul>
