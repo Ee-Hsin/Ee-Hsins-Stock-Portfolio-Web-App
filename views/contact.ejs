@@ -1,2 +1,73 @@
-<% layout('layouts/boilerplate')%>
-<h1>Contact Me!</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ee Hsin's Stock Portfolio</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/contact_page.css">
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <%- include('./partials/navbar')%>
+    <main class="container my-5">
+        <%- include('./partials/flash')%>
+        <div class="row align-items-center mb-3">
+            <h1>Contact Me!</h1>
+            <h2>You can expect a response in 2-3 working days</h2>          
+        </div>
+        <form action="/contact" method="POST">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                    <label for="firstName">First Name:</label>
+                    <br>
+                    <input type="text" id ="firstName" name = "firstName "placeholder="First Name">
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 mb-3">
+                    <label for="lastName">Last Name:</label>
+                    <br>
+                    <input type="text" id ="lastName" name = "lastName" placeholder="Last Name">
+                </div>
+            </div>
+            <div class="row">
+                <div class = "col-12 col-sm-8 mb-3">
+                    <label for="email">Your Email:</label>
+                    <br>
+                    <input type="email" id="email" name="email" placeholder="Email">
+                    <span id = "email-feedback"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class = "col-12 col-sm-8 mb-3">
+                    <label for="subject">Subject Matter:</label>
+                    <br>
+                    <input type="text" id ="subject" name = "subject" placeholder="Subject">
+                </div>
+            </div>
+            <div class="row">
+                <div class = "col-10 col-sm-8 mb-3">
+                    <label for="subject">Inquiry:</label>
+                    <br>
+                    <textarea name="inquiry" id="inquiry" cols="70" rows="5" placeholder="Enter your inquiry here..."></textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Submit form</button>
+        </form>
+    </main>
+    <%- include('./partials/footer')%>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
+        
+    <script src="/javascripts/validateForms.js"></script>
+</body>
+
+</html>
+
+
+<!-- firstName, lastName, Email, Subject, Inquiry -->

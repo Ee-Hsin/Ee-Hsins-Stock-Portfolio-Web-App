@@ -1,0 +1,13 @@
+#email-feedback{
+    display: block;
+    font-weight: 300;
+    font-style: italic;
+}
+
+#email-feedback.valid{
+    color: #05a148;
+}
+
+#email-feedback.invalid{
+    color: red;
+}

@@ -13,22 +13,6 @@ const User = require('./models/user');
 const userRoutes = require('./routes/users');
 const portfolioRoutes = require('./routes/portfolio');
 
-//Basic TODO List:
-/*
- - To validate forms with Boostrap, add the class of "validated-form" to a form, and in the public js files,
- include the code Bootstrap gave us at the bottom of the Boilerplate in pt37.
-(Though colt made an adjustment to it, he used "validation form" instead of "needs-validation",
-refer to the bootstrap form link for more info: 
-https://getbootstrap.com/docs/4.0/components/forms/#validation.
- 
- - Use passport for authentication (he will use local authentication) but we can 
- use Google authentication, Facebook login etc... 
- - We need to install passport, and install the passport-google-oauth20 packages.
- Refer to here: https://www.youtube.com/watch?v=o9e3ex-axzA&ab_channel=Vuka
- 
-- Have Current Price and 200SMA come from API.
-*/
-
 /*COMMANDS:
 1. Press CTRL+D while selecting something to select another one, and keep
 pressing to eventualy select all.
@@ -126,6 +110,11 @@ app.get('/guide', (req, res) => {
 
 app.get('/contact', (req, res) => {
     res.render('contact')
+});
+
+app.post('/contact', (req, res) => {
+    req.flash('success', 'Thank you for submitting an Inquiry, you can expect a response within 2-3 Working Days');
+    res.redirect('/portfolio');
 });
 
 //ERROR HANDLERS

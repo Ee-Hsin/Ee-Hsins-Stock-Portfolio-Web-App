@@ -1,0 +1,45 @@
+h1 {
+    font-size: 3rem;
+}
+
+#email {
+    width: 13rem;
+}
+
+#email-feedback{
+    font-weight: 300;
+    font-style: italic;
+}
+
+#email-feedback.valid{
+    color: #05a148;
+}
+
+#email-feedback.invalid{
+    color: red;
+}
+
+input{
+    max-width: 100%;
+}
+textarea {
+    max-width: 100%;
+}
+
+@media (max-width: 205px){
+    h1{
+        display: none;
+    }
+}
+
+@media (max-width: 229px){
+    h2{
+        display: none;
+    }
+}
+
+@media (max-width: 485px){
+    #email-feedback{
+        display: block;
+    }
+}
