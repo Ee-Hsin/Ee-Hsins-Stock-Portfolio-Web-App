@@ -1,0 +1,19 @@
+<% layout('layouts/boilerplate')%>
+
+
+<ul>
+    <li>Name: <%= stock.name %></li>
+    <li>Ticker: <%= stock.ticker %></li>
+    <li>Price: <%= stock.price %></li>
+    <li>IV: <%= stock.IV %></li>
+    <li>Category: <%= stock.category %></li>
+</ul>
+
+<p>
+    <form action="/portfolio/<%=stock._id%>?_method=DELETE" method="POST">
+        <button>Delete</button>
+    </form>
+</p>
+<a href="/portfolio/<%= stock._id%>/edit">Edit Stock</a>
+<a href="/portfolio">Back to Portfolio</a>
+

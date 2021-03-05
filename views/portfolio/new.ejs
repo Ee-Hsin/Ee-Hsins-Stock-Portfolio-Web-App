@@ -1,0 +1,25 @@
+<% layout('layouts/boilerplate')%>
+<form action="/portfolio" method="POST">
+    <div>
+        <label for="name">Name of Stock</label>
+        <input type="text" id="name" name="stock[name]">
+    </div>
+    <div>
+        <label for="ticker">Ticker</label>
+        <input type="text" id="ticker" name="stock[ticker]">
+    </div>
+    <div>
+        <label for="price">Price</label>
+        <input type="number" id="price" name="stock[price]">
+    </div>
+    <div>
+        <label for="IV">Intrinsic Value</label>
+        <input type="text" id="IV" name="stock[IV]">
+    </div>
+    <div>
+        <label for="category">Category</label>
+        <input type="text" id="category" name="stock[category]">
+    </div>
+    <button>Add Stock</button>
+</form>
+<a href="/portfolio">All Stocks</a>

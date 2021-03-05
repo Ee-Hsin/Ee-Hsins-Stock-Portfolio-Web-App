@@ -1,0 +1,6 @@
+<% layout('layouts/boilerplate')%>
+<h1>The Portfolio Index Page!</h1>
+<a href ="/portfolio/new">Add New Stock</a>
+<% for (let stock of stocks) {%>
+    <li><a href="/portfolio/<%= stock._id %>"><%= stock.name %></a></li>
+<% }%>
