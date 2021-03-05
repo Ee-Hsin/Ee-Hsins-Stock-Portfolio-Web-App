@@ -19,20 +19,22 @@ seedProducts = [
         name: 'Adobe',
         ticker: 'ADBE',
         price: 430,
-        category: 'Large Cap Growth'
+        units: 6,
+        IV: '460',
+        category: 'Large Cap Growth',
+        description: 'Software company that has a strong economic moat due to a lack of competitors and high switching costs of products',
+        image: '../public/images/Adobe_logo.jpg'
+
     },
     {
         name: 'Microsoft',
         ticker: 'MSFT',
         price: 220,
+        units: 27,
         IV : '220',
-        category: 'Large Cap Growth'
-    },
-    {
-        name: 'Cost Co',
-        ticker: 'COST',
-        price: 430,
-        category: 'Large Cap Predictable'
+        category: 'Large Cap Growth',
+        description: 'Software company that has a strong economic moat due to a lack of competitors and high switching costs of products, as well as strong growth drivers due to cloud computing',
+        image: '../public/images/Microsoft_logo.jpg'
     }
 ]
 

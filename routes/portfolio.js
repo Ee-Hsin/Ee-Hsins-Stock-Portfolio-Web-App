@@ -28,7 +28,8 @@ router.get('/:id', catchAsync(async (req, res,) => {
         req.flash('error', 'Cannot find that Stock!');
         return res.redirect('/portfolio')
     }
-    res.render('portfolio/show', { stock });
+    const currentPrice = await stock.currentPrice;
+    res.render('portfolio/show', { stock, currentPrice });
 }));
 
 router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res,) => {

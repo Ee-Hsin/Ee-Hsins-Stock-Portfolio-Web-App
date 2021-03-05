@@ -27,7 +27,12 @@ router.post('/register', catchAsync(async (req, res, next) => {
             res.redirect('/portfolio');
         })
     } catch (e) {
-        req.flash('error', e.message);
+        console.log(e.keyValue)
+        if (e.keyValue != undefined){
+            req.flash('error', 'An error occured. It is likely that the Email is already registered');
+        }else {
+            req.flash('error', e.message);
+        }
         res.redirect('register');
     }
 }));

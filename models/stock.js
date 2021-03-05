@@ -1,3 +1,4 @@
+const yahooStockPrices = require('yahoo-stock-prices');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -16,6 +17,10 @@ const StockSchema = new Schema({
         type: Number,
         required: true
     },
+    units : {
+        type: Number,
+        required: true
+    },
     IV : {
         type: String,
         default: "N/A",
@@ -23,8 +28,21 @@ const StockSchema = new Schema({
     category : {
         type: String,
         required: true
+    },
+    description : {
+        type: String,
+        required: true
+    },
+    image : {
+        url: String,
     }
     
 });
+
+StockSchema.virtual('currentPrice').get(async function () {
+    const currPrice = await yahooStockPrices.getCurrentPrice(this.ticker);
+    console.log(currPrice);
+    return currPrice;
+})
 
 module.exports = mongoose.model('Stock', StockSchema);

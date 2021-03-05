@@ -4,11 +4,15 @@
 <ul>
     <li>Name: <%= stock.name %></li>
     <li>Ticker: <%= stock.ticker %></li>
-    <li>Price: <%= stock.price %></li>
+    <li>Avg Price: <%= stock.price %></li>
+    <li>Units: <%= stock.units %></li>
+    <li>Current Price: <%= currentPrice %></li>
     <li>IV: <%= stock.IV %></li>
     <li>Category: <%= stock.category %></li>
+    <li>Description: <%= stock.description %></li>
 </ul>
-
+</ul>
+<% if (currentUser && currentUser._id == adminId) { %>
 <p>
     <form action="/portfolio/<%=stock._id%>?_method=DELETE" method="POST">
         <button>Delete</button>
@@ -16,6 +20,7 @@
 </p>
 <div>
     <a href="/portfolio/<%= stock._id%>/edit">Edit Stock</a>
+  <% } %>
     <a href="/portfolio">Back to Portfolio</a>
 </div>
 

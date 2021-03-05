@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
+
 const express = require("express");
 const path = require('path');
 const mongoose = require('mongoose');
@@ -90,10 +94,12 @@ passport.deserializeUser(User.deserializeUser()); //How to unstore the user in t
 //Using flash so it appears in all our local ejs files that we render
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
+    res.locals.adminId = process.env.ADMIN_USER_ID;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
 })
+
 
 //ROUTES
 
