@@ -140,7 +140,8 @@ app.post('/contact', catchAsync( async(req, res) => {
 
 //ERROR HANDLERS
 app.all('*', (req, res, next) => { //If someone goes to a path we didn't handle up there (and hence doesn't exist)
-    next(new ExpressError('Page Not Found', 404))
+    req.flash('error', '404, that Page Does not Exist');
+    res.redirect('/portfolio')
 })
 
 app.use((err, req, res, next) => {

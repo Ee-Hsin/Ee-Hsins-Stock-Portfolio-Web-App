@@ -30,3 +30,13 @@ module.exports.isLoggedIn = (req, res, next) => {
     }
     next();
 }
+
+module.exports.isAdmin = (req,res,next) => {
+    if (res.locals.currentUser && res.locals.currentUser._id == res.locals.adminId){
+        next()
+    } else {
+        req.session.returnTo = req.originalUrl
+        req.flash('error', 'You are not an admin!');
+        return res.redirect('/portfolio');
+    }
+}

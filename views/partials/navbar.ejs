@@ -9,7 +9,9 @@
             <div class="navbar-nav">
                 <a class="nav-link" href="/">Home</a>
                 <a class="nav-link" href="/portfolio">Stocks</a>
+                <% if (currentUser && currentUser._id == adminId) { %>
                 <a class="nav-link" href="/portfolio/new">Add Stock</a>
+                <% } %>
                 <a class="nav-link" href="/guide">Guide</a>
                 <a class="nav-link" href="/contact">Contact Me</a>
             </div>
