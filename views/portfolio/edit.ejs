@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate')%>
 
 <h1>Edit Stock</h1>
-<form action="/portfolio/<%=stock._id%>?_method=PUT" method="POST">
+<form action="/portfolio/<%=stock._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
     <div>
         <label for="name">Name of Stock</label>
         <input type="text" id="name" name="stock[name]" value="<%=stock.name %>">
@@ -15,6 +15,10 @@
         <input type="number" id="price" name="stock[price]" value="<%=stock.price %>">
     </div>
     <div>
+        <label for="units">Units</label>
+        <input type="number" id="units" name="stock[units]" value="<%=stock.units %>">
+    </div>
+    <div>
         <label for="IV">Intrinsic Value</label>
         <input type="text" id="IV" name="stock[IV]" value="<%=stock.IV %>">
     </div>
@@ -22,7 +26,29 @@
         <label for="category">Category</label>
         <input type="text" id="category" name="stock[category]" value="<%=stock.category %>">
     </div>
-
+    <div>
+        <label for="description">Description</label>
+        <input type="text" id="description" name="stock[description]" value="<%=stock.description%>">
+    </div>
+    <div>
+        <div class="form-file custom-file col-3">
+            <input type="file" class="form-file-input" id="image" name="image" multiple>
+            <label class="form-file-label" for="image">
+                <span class="form-file-text custom-file-label">Choose image(s)...</span>
+                <span class="form-file-button">Browse</span>
+            </label>
+        </div>    
+    </div>
+    <div class="mb-3">
+        <% stock.images.forEach(function(img, i) {  %>
+     
+        <img src="<%=img.thumbnail %>" class="img-thumbnail" alt="">
+        <div class="form-check-inline">
+            <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+        </div>
+        <label for="image-<%=i%>">Delete?</label>
+        <% })%>
+    </div>
     <button>Update Campground</button>
 </form>
 

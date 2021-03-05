@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
 const catchAsync = require('../utils/catchAsync');
+
+const multer  = require('multer');
+const { storage, cloudinary } = require('../cloudinary');
+const upload = multer({ storage });
+
 const { validateStock, isLoggedIn, isAdmin } = require('../middleware.js');
 
 const ExpressError = require('../utils/ExpressError');
@@ -16,8 +21,9 @@ router.get('/new', isLoggedIn, isAdmin, (req, res,) => {
     res.render('portfolio/new');
 });
 
-router.post('/', isLoggedIn, isAdmin, validateStock, catchAsync(async (req, res) => {
+router.post('/', isLoggedIn, isAdmin, upload.array('image'), validateStock, catchAsync(async (req, res) => {
     const stock = new Stock(req.body.stock);
+    stock.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
     await stock.save();
     req.flash('success', 'Successfully added Stock')
     res.redirect(`/portfolio/${stock._id}`)
@@ -42,15 +48,29 @@ router.get('/:id/edit', isLoggedIn, isAdmin, catchAsync(async (req, res,) => {
     res.render('portfolio/edit', { stock });
 }));
 
-router.put('/:id', isLoggedIn, isAdmin, validateStock, catchAsync(async (req, res) => {
+router.put('/:id', isLoggedIn, isAdmin, upload.array('image'), validateStock, catchAsync(async (req, res) => {
     const { id } = req.params;
     const stock = await Stock.findByIdAndUpdate(id, { ...req.body.stock });
+    const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
+    stock.images.push(...imgs);
+    await stock.save();
+
+    //For deleting images
+    if (req.body.deleteImages) { 
+        for (let filename of req.body.deleteImages) { //loop through images to remove them from cloudinary
+            await cloudinary.uploader.destroy(filename);
+        }
+        //no need for loop to iterate through for this one, it will pull all images where filename is in the req.body.deleteImages array.
+        await stock.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
+    }
+
     req.flash('success', 'Successfully edited Stock')
     res.redirect(`/portfolio/${stock._id}`)
 }));
 
 router.delete('/:id', isLoggedIn, isAdmin, catchAsync(async (req, res) => {
     const { id } = req.params;
+    //I can add functionality here to findId of stock, and delete all images associated with the stock.
     await Stock.findByIdAndDelete(id);
     req.flash('success', 'Successfully deleted Stock')
     res.redirect('/portfolio');

@@ -2,11 +2,7 @@ const { stockSchema } = require('./schemas.js');//requiring at the top
 const ExpressError = require('./utils/ExpressError');
 
 
-module.exports.validateStock = (req, res, next) => {//This is a middleware function that helps us catch validation
-    //errors, (this won't catch async errors, that is for the next middleware), and if there are
-    //no validation errors, it calls next() and passes it on, likely to an async function wrapped with a catchAsync() that will handle
-    //the async errors.
-
+module.exports.validateStock = (req, res, next) => {
     const { error } = stockSchema.validate(req.body);//We extract {error} from
     //the campgroundSchema Joi schema's .validate() function to validate that the info passed in fits our schema.
 

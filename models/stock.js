@@ -2,8 +2,16 @@ const yahooStockPrices = require('yahoo-stock-prices');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-//Everytime we update this Schema, we have to re-seed, and update our JOI as well.
+const ImageSchema = new Schema({
+    url: String,
+    filename: String
+});
 
+ImageSchema.virtual('thumbnail').get(function () {
+    return this.url.replace('/upload', '/upload/w_200');
+});
+
+//Everytime we update this Schema, we have to re-seed, and update our JOI as well.
 const StockSchema = new Schema({
     name: {
         type: String,
@@ -33,10 +41,7 @@ const StockSchema = new Schema({
         type: String,
         required: true
     },
-    image : {
-        url: String,
-    }
-    
+    images : [ImageSchema] //it's an array
 });
 
 StockSchema.virtual('currentPrice').get(async function () {

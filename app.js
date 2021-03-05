@@ -30,7 +30,8 @@ pressing to eventualy select all.
 mongoose.connect('mongodb://localhost:27017/stock-portfolio', {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 });
 
 const db = mongoose.connection;

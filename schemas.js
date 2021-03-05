@@ -9,6 +9,6 @@ module.exports.stockSchema = Joi.object({
         IV: Joi.string(),
         category: Joi.string().required(),
         description: Joi.string().required(),
-        image: Joi.string()
-    }).required()
+    }).required(),
+    deleteImages: Joi.array(),
 });

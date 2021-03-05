@@ -1,5 +1,5 @@
 <% layout('layouts/boilerplate')%>
-<form action="/portfolio" method="POST">
+<form action="/portfolio" method="POST" enctype="multipart/form-data">
     <div>
         <label for="name">Name of Stock</label>
         <input type="text" id="name" name="stock[name]">
@@ -27,6 +27,15 @@
     <div>
         <label for="description">Description</label>
         <input type="text" id="description" name="stock[description]">
+    </div>
+    <div>
+        <div class="form-file custom-file col-3">
+            <input type="file" class="form-file-input" id="image" name="image" multiple>
+            <label class="form-file-label" for="image">
+                <span class="form-file-text custom-file-label">Choose image(s)...</span>
+                <span class="form-file-button">Browse</span>
+            </label>
+        </div>    
     </div>
     <button>Add Stock</button>
 </form>
