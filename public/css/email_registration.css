@@ -1,3 +1,7 @@
+* {
+    font-family: 'Economica', sans-serif;
+}
+
 #email-feedback{
     display: block;
     font-weight: 300;

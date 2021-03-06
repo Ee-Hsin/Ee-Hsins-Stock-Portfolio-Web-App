@@ -1,3 +1,28 @@
+* {
+    font-family: 'Economica', sans-serif;
+}
+
+.nav-link {
+    padding: 0.25rem 0;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    margin-left: 1rem;
+    border-bottom: 0.25rem solid transparent;
+    font-size: 1.3rem;
+
+}
+
+.nav-link:hover{
+    color: rgba(255,255,255,0.5);
+    border-bottom-color:rgba(255,255,255,0.5);
+}
+
+.nav-link.active {
+    color: white;
+    border-bottom-color:white;
+
+}
+
 body {
     height: 100vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
@@ -11,24 +36,7 @@ body {
   max-width: 60vw;
 }
 
-.nav-link {
-    padding: 0.25rem 0;
-    font-weight: 700;
-    color: rgba(255,255,255,0.5);
-    margin-left: 1rem;
-    border-bottom: 0.25rem solid transparent;
-}
 
-.nav-link:hover{
-    color: rgba(255,255,255,0.5);
-    border-bottom-color:rgba(255,255,255,0.5);
-}
-
-.nav-link.active {
-    color: white;
-    border-bottom-color:white;
-
-}
 
 .btn-secondary{
     color: #333;
