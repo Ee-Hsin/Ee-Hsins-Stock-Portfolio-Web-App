@@ -11,6 +11,10 @@ ImageSchema.virtual('thumbnail').get(function () {
     return this.url.replace('/upload', '/upload/w_200');
 });
 
+// ImageSchema.virtual('thumbnailIndex').get(function () {
+//     return this.url.replace('/upload', '/upload/w_300');
+// });
+
 //Everytime we update this Schema, we have to re-seed, and update our JOI as well.
 const StockSchema = new Schema({
     name: {
@@ -46,7 +50,6 @@ const StockSchema = new Schema({
 
 StockSchema.virtual('currentPrice').get(async function () {
     const currPrice = await yahooStockPrices.getCurrentPrice(this.ticker);
-    console.log(currPrice);
     return currPrice;
 })
 

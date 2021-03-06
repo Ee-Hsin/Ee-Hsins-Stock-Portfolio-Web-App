@@ -122,14 +122,12 @@ app.get('/contact', (req, res) => {
 });
 
 app.post('/contact', catchAsync( async(req, res) => {
-    console.log('Data: ', req.body);
     const {firstName, lastName, email, subject, inquiry} = req.body;
     
     const text = "From: "+ firstName + " " + lastName + "\nMessage is:\n" + inquiry;
     await sendMail(email,subject,text, function (err,data) {
         //This code inside does not work for some reason
         if(err){
-            console.log("Email was not sent")
             req.flash('error', 'Your email was not sent, as an error occured.');
         } else {
             req.flash('success', 'Thank you for submitting an Inquiry, I will try to respond within 2-3 Working Days');

@@ -1,0 +1,95 @@
+.navbar {
+    opacity: 0.85;   
+}
+
+.nav-link {
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    margin-left: 1rem;
+    border-bottom: 0.25rem solid transparent;
+}
+
+.nav-link:hover{
+    color: rgba(255,255,255,0.5);
+    border-bottom-color:rgba(255,255,255,0.5);
+}
+
+.nav-link.active {
+    color: white;
+    border-bottom-color:white;
+
+}
+
+h3.web-page-name{
+    font-weight: 300;
+    color: white;
+    margin-right: 0.8rem;
+}
+
+.footer {
+    opacity: 0.85;   
+}
+
+h1 {
+    border: rgba(163, 130, 39, 0.65) solid;
+    border-width: 0.1rem;
+    background-color: rgba(38,41,8,0.9);
+    color: rgb(255, 255, 255);
+    padding: 0.5rem;
+    width: 50%;
+    margin: 1rem 25%;
+    display: flex;
+    justify-content: center;
+}
+
+h1:hover {
+    border-color: rgba(210, 222, 124, 0.9);
+    border-width: 0.2rem;
+    transition: 0.1s;
+}
+
+.text-muted {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+body {
+    background-color: #d6d3bb;
+    background-blend-mode: darken;
+    background-image: url('/images/new_york_sky_shot.jpg'), url('/images/fearless_girl.jpg');
+}
+
+.img-fluid {
+    max-height: 100%;
+}
+.card {
+    color: white;
+    background-color: rgba(38,41,8,0.9);
+    margin-bottom: 1%;
+    border-radius: 1%;
+    border: transparent; 
+}
+
+.card:hover{
+    background-color: rgba(38,41,8,1);
+    transition: 0.1s;
+    border-style: solid;
+    border-color: rgba(210, 222, 124, 0.9);
+}
+
+.btn-primary {
+    background-color: orange;
+    border: transparent;
+}
+
+.btn-primary:hover {
+    background-color: rgb(176, 18, 41);
+    transition: 0.25s;
+    border: solid rgb(222, 165, 124,0.9);
+}
+
+@media (max-width: 276px){
+    h1{
+        display: none;
+    }
+}
