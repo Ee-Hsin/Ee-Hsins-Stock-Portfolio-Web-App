@@ -71,9 +71,9 @@ main {
 }
 
 body {
-    background-color: #d6d3bb;
-    background-blend-mode: difference;
-    background-image: url('/images/wall_street_sign.jpg'),url('/images/suit_man_phone.jpg');
+    background: url('/images/daylight.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 @media (max-width: 205px){

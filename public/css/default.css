@@ -59,12 +59,15 @@ h1:hover {
 }
 
 body {
-    background-color: #d6d3bb;
+    /* background-color: #d6d3bb;
     background-blend-mode: darken;
     background-image: url('/images/new_york_sky_shot.jpg'),url('/images/fearless_girl.jpg');
-    background-size: cover;
+    background-size: cover; */
+    /* background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(6,6,98,1) 0%, rgba(108,144,240,1) 35%, rgba(0,212,255,1) 100%); */
+    background: rgb(189,152,152);
+    background: linear-gradient(90deg, rgba(189,152,152,1) 0%, rgba(134,137,153,1) 49%, rgba(19,100,159,1) 100%);
 }
-
 body.register-or-login{
     background-image: url('/images/jersey_city.jpg');
     background-size: cover;
@@ -73,6 +76,7 @@ body.register-or-login{
 .guide{
     background: url('/images/daylight.jpg');
     background-size: cover;
+    background-position: center;
 }
 
 .img-fluid {
