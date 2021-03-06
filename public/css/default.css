@@ -53,7 +53,16 @@ h1:hover {
     transition: 0.1s;
 }
 
-.text-muted {
+.card-title{
+    font-size: 1.6rem;
+}
+
+.card-text {
+    color: rgb(253, 191, 75);
+}
+
+.card-text .text-muted {
+    color:white;
     font-size: 1rem;
     font-weight: 600;
 }
@@ -88,12 +97,13 @@ body.register-or-login{
     margin-bottom: 1%;
     padding: 0.15rem;
     border-radius: 1%;
-    border: transparent; 
+    border: rgba(241, 231, 231, 0.5) solid; 
 }
 
 .card:hover{
     background-color: rgba(38,41,8,1);
     transition: 0.1s;
+    border-width:0.3rem;
     border-style: solid;
     border-color: rgba(210, 222, 124, 0.9);
 }

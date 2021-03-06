@@ -48,9 +48,19 @@ const StockSchema = new Schema({
     images : [ImageSchema] //it's an array
 });
 
-StockSchema.virtual('currentPrice').get(async function () {
+//DO NOT WRAP WITH CATCH ASYNC, BECAUSE CATCH ASYNC USES ARROW FUNCTIONS, WHICH USES ".this" differently!
+StockSchema.virtual('currentPrice').get (async function () {
     const currPrice = await yahooStockPrices.getCurrentPrice(this.ticker);
     return currPrice;
-})
+});
+
+// Virtual with returns
+//DO NOT WRAP WITH CATCH ASYNC, BECAUSE CATCH ASYNC USES ARROW FUNCTIONS, WHICH USES ".this" differently!
+StockSchema.virtual('returns').get(async function(){
+    const currPrice = await yahooStockPrices.getCurrentPrice(this.ticker);
+    const stockReturns = 100*(currPrice / this.price) -100;
+    return Number.parseFloat(stockReturns).toFixed(2); //rounds to 2 decimal places.
+});
+
 
 module.exports = mongoose.model('Stock', StockSchema);

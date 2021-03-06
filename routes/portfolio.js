@@ -14,7 +14,12 @@ const Stock = require('../models/stock')//can ship this off to individual route 
 router.get('/', catchAsync(async (req, res) => {
     const stocks = await Stock.find({});
     //Add a sorting method here.
-    res.render('portfolio/index', {stocks})
+    const returns =[];
+    for (let stock of stocks){
+        let stockReturn = await stock.returns;
+        returns.push(stockReturn);
+    }
+    res.render('portfolio/index', {stocks, returns})
 }));
 
 router.get('/new', isLoggedIn, isAdmin, (req, res,) => {
@@ -36,7 +41,8 @@ router.get('/:id', catchAsync(async (req, res,) => {
         return res.redirect('/portfolio')
     }
     const currentPrice = await stock.currentPrice;
-    res.render('portfolio/show', { stock, currentPrice });
+    const returns = await stock.returns;
+    res.render('portfolio/show', { stock, currentPrice, returns });
 }));
 
 router.get('/:id/edit', isLoggedIn, isAdmin, catchAsync(async (req, res,) => {
