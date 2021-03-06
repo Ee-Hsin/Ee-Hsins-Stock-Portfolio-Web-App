@@ -59,7 +59,7 @@ StockSchema.virtual('currentPrice').get (async function () {
 StockSchema.virtual('returns').get(async function(){
     const currPrice = await yahooStockPrices.getCurrentPrice(this.ticker);
     const stockReturns = 100*(currPrice / this.price) -100;
-    return Number.parseFloat(stockReturns).toFixed(2); //rounds to 2 decimal places.
+    return stockReturns.toFixed(2); //rounds to 2 decimal places.
 });
 
 
