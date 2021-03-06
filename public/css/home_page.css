@@ -2,6 +2,11 @@
     font-family: 'Economica', sans-serif;
 }
 
+nav{
+    background-color: rgb(43, 41, 41);
+    opacity: 0.75;
+    padding: 0.5rem 1rem;
+}
 .nav-link {
     padding: 0.25rem 0;
     font-weight: 700;
@@ -13,8 +18,9 @@
 }
 
 .nav-link:hover{
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.8);
     border-bottom-color:rgba(255,255,255,0.5);
+    transition:0.2s;
 }
 
 .nav-link.active {
@@ -23,30 +29,75 @@
 
 }
 
+/* @keyframes cycle {
+    0%{
+        background-image: url('/images/home_page_picture.jpg');
+    }
+    10%{
+        background-image: url('/images/dede.jpg');
+    }
+} */
+
+@keyframes animate{
+    0%{
+        background-image: url('/images/home_page_picture.jpg');
+    }
+    33%{
+        background-image: url('/images/home_page_picture2.jpg');
+    }
+    66%{
+        background-image: url('/images/home_page_picture3.jpg');
+    }
+    100%{
+        background-image: url('/images/home_page_picture2.jpg');
+    }
+}
+
 body {
     height: 100vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('/images/home_page_picture.jpg');
-    background-size: cover;
-    background-position: center;
     text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
     box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
 }
+.animated-background{
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat; 
+    transition: 0.2s;
+
+    animation-name: animate;
+    animation-direction: alternate-reverse;    
+    animation-duration: 30s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function: ease-in-out; 
+}
+
 .cover-container {
   max-width: 60vw;
 }
 
-
-
 .btn-secondary{
-    color: #333;
     text-shadow: none;
 }
 
 .btn-secondary:hover{
-    color: #595853;
-    text-shadow: none;
+    background-color: rgb(176, 18, 41);
+    transition: 0.25s;
 }
+
+/* #website_description{
+    background-color: black;
+    padding-top: 1.2rem ;
+    padding-bottom: 1.2rem ;
+} */
+
+#website_description:hover{
+    background-color: black;
+    padding-top: 1.2rem ;
+    padding-bottom: 1.2rem ;
+}
+
 
 @media (max-width: 270px){
     #website_description {

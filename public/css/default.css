@@ -61,7 +61,18 @@ h1:hover {
 body {
     background-color: #d6d3bb;
     background-blend-mode: darken;
-    background-image: url('/images/new_york_sky_shot.jpg'), url('/images/fearless_girl.jpg');
+    background-image: url('/images/new_york_sky_shot.jpg'),url('/images/fearless_girl.jpg');
+    background-size: cover;
+}
+
+body.register-or-login{
+    background-image: url('/images/jersey_city.jpg');
+    background-size: cover;
+}
+
+.guide{
+    background: url('/images/daylight.jpg');
+    background-size: cover;
 }
 
 .img-fluid {
@@ -92,6 +103,31 @@ body {
     background-color: rgb(176, 18, 41);
     transition: 0.25s;
     border: solid rgb(222, 165, 124,0.9);
+}
+
+@keyframes blink {
+    0%{
+        border: rgb(209, 142, 18) solid;
+    }
+    50%{
+        border: yellow solid;
+    }
+    80%{
+        border: red solid;
+    }
+    100%{
+        border:rgb(207, 146, 15) solid;
+    }
+}
+
+.card.register-or-login{
+    border-width: 0.5rem;
+    animation: blink 10s infinite;
+}
+
+.card.register-or-login:hover{
+    animation: none;
+    border: none;
 }
 
 @media (max-width: 276px){
