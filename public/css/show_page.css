@@ -1,0 +1,99 @@
+body {
+    /* background-color: #d6d3bb;
+    background-blend-mode: darken;
+    background-image: url('/images/new_york_sky_shot.jpg'),url('/images/fearless_girl.jpg');
+    background-size: cover; */
+    /* background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(6,6,98,1) 0%, rgba(108,144,240,1) 35%, rgba(0,212,255,1) 100%); */
+    background: rgb(189,152,152);
+    background: linear-gradient(90deg, rgba(189,152,152,1) 0%, rgba(134,137,153,1) 56%, rgb(90, 114, 150) 100%);
+}
+
+.main-block{
+    padding: 1rem;
+    background-color: rgba(194, 173, 173,0.5);
+}
+
+/* The h1 and h2 at the top */
+.title{
+    padding-bottom: 0.5rem;
+    border-bottom: outset rgba(202, 138, 41, 0.938) 0.2rem;
+    margin-bottom: 0.8rem;
+}
+
+.title h1{
+    font-size: 3.5rem; 
+}
+
+.title h2{
+    font-size: max(1.5rem,2vw);
+}
+
+.secondary-title{
+    padding: 0.1rem;
+    border-bottom: rgba(110, 88, 74, 0.8) solid 0.1rem;
+}
+.secondary-title h2{
+    font-size:1.7rem;
+}
+
+
+/* Designing the Ticker Symbol link (Need to follow this LoVe Fears HAte format) */
+h2 a {
+    outline: none;
+    text-decoration: none;
+    border-bottom: 1px solid;
+    padding: 3px 3px 0;
+    font-weight: 500;
+    font-size: 2.5rem;
+  }
+  
+h2 a:link {
+    color: rgba(189, 126, 85, 0.8);
+    text-decoration: none;
+  }
+  
+  a:visited {
+    color: rgba(189, 126, 85, 0.8);
+    text-decoration: none;
+  }
+  
+  a:focus {
+    border-bottom: 2px solid;
+  }
+  
+  a:hover {
+    border-bottom: 2px solid;
+  }
+  
+  a:active {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+.performance-section .returns-label{
+    font-size: 2.6rem;
+}
+
+.performance-section .returns-positive{
+    font-size: max(3rem,7vw);
+    color: #206303;
+}
+
+.performance-section .returns-negative{
+    font-size: max(3rem,7vw);
+    
+    color: #b51a28;
+}
+
+.undervalued {
+    color: #257901;
+}
+
+.signif-undervalued {
+    color: #1b5303;
+    font-weight: 700;
+}
+
+.overvalued {
+    color: #b43944;
+}

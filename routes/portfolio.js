@@ -18,12 +18,11 @@ router.get('/', catchAsync(async (req, res) => {
     //Add a sorting method here.
     stocks.sort(compare);
 
-    const returns =[];
     for (let stock of stocks){
-        let stockReturn = await stock.returns;
-        returns.push(stockReturn);
+        const {stockReturns} = await stock.currentPriceAndReturns;
+        stock.vReturns = stockReturns;
     }
-    res.render('portfolio/index', {stocks, returns})
+    res.render('portfolio/index', {stocks})
 }));
 
 router.get('/new', isLoggedIn, isAdmin, (req, res,) => {
@@ -44,11 +43,17 @@ router.get('/:id', catchAsync(async (req, res,) => {
         req.flash('error', 'Cannot find that Stock!');
         return res.redirect('/portfolio')
     }
-    const currentPrice = await stock.currentPrice;
-    const returns = await stock.returns;
-    const candleData = await stock.oneYearCandleData;
+    const {currPrice,stockReturns} = await stock.currentPriceAndReturns;
+    stock.vCurrentPrice = currPrice;
+    stock.vReturns = stockReturns;
 
-    res.render('portfolio/show', { stock, currentPrice, returns, candleData});
+    const candleData = await stock.oneYearCandleData;
+    stock.vReturnsYTD = await stock.returnsYTD;
+
+    //adding discount to stock
+    stock.discount = (((parseFloat(stock.IV)/stock.vCurrentPrice)-1) * -100).toFixed(2) || "N/A";
+
+    res.render('portfolio/show', { stock, candleData});
 }));
 
 router.get('/:id/edit', isLoggedIn, isAdmin, catchAsync(async (req, res,) => {

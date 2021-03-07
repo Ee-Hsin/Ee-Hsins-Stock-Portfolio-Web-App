@@ -1,0 +1,36 @@
+* {
+    font-family: 'Economica', sans-serif;
+}
+
+.navbar {
+    opacity: 0.85;   
+}
+
+.nav-link {
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    margin-left: 1rem;
+    border-bottom: 0.25rem solid transparent;
+    font-size: 1.3rem;
+}
+
+.nav-link:hover{
+    color: rgba(255,255,255,0.5);
+    border-bottom-color:rgba(255,255,255,0.5);
+}
+
+.nav-link.active {
+    color: white;
+    border-bottom-color:white;
+
+}
+
+h3.web-page-name{
+    font-weight: 300;
+    color: white;
+    margin-right: 0.8rem;
+}
+
+.footer {
+    opacity: 0.85;   
+}

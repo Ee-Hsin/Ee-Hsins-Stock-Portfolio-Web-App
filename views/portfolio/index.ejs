@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Economica:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">   
     <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="/css/navbar_footer.css">
 </head>
 
 <body class="d-flex flex-column vh-100">
@@ -22,7 +23,6 @@
                     <% if (currentUser && currentUser._id == adminId) { %>
                         <a href ="/portfolio/new">Add New Stock</a>
                     <% } %>
-                    <% let count = 0; %> 
                     <% for (let stock of stocks) {%>
                         <div class="card col-md-6 col-lg-4" style="font-size: 1rem">
                             <div class="row">
@@ -34,8 +34,7 @@
                                             Ticker Symbol: <%= stock.ticker %>
                                         </p>
                                         <p><%= stock.description.split(' ').slice(0,6).join(' ') + '...' %></p>
-                                        <p>My Returns: <b style = <%= returns[count]>0 ? `color:#4ca54c` : "color:#b51a28"%>><%= returns[count] %>%</b></p>
-                                        <% count += 1; %> 
+                                        <p>My Returns: <b style = <%= stock.vReturns>0 ? `color:#4ca54c` : "color:#b51a28"%>><%= stock.vReturns %>%</b></p>
                                         <a class="btn btn-primary" href="/portfolio/<%=stock._id%>">View <%=stock.name%></a>
                                     </div>
                                 </div>

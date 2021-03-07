@@ -11,6 +11,7 @@ const Schema = mongoose.Schema;
 
 //Axios
 const axios = require('axios');
+const ExpressError = require('../utils/ExpressError');
 
 const ImageSchema = new Schema({
     url: String,
@@ -59,35 +60,23 @@ const StockSchema = new Schema({
 });
 
 //DO NOT WRAP WITH CATCH ASYNC, BECAUSE CATCH ASYNC USES ARROW FUNCTIONS, WHICH USES ".this" differently!
-StockSchema.virtual('currentPrice').get (async function () {
+StockSchema.virtual('currentPriceAndReturns').get (async function () {
     try{
         const currPrice = await yahooStockPrices.getCurrentPrice(this.ticker);
-        return currPrice;
+        const stockReturns = (100*(currPrice / this.price) -100).toFixed(2);
+        return {currPrice, stockReturns};
     } catch(e){
-        next(e);
+        throw new ExpressError("There has been an error obtaining prices", 404);
     }
 
 });
 
-// Virtual with returns
-//DO NOT WRAP WITH CATCH ASYNC, BECAUSE CATCH ASYNC USES ARROW FUNCTIONS, WHICH USES ".this" differently!
-StockSchema.virtual('returns').get(async function(){
-    try{
-        const currPrice = await this.currentPrice;
-        const stockReturns = 100*(currPrice / this.price) -100;
-        return stockReturns.toFixed(2); //rounds to 2 decimal places.
-    } catch(e){
-        next(e);
-    }
-
-});
 
 StockSchema.virtual('oneYearCandleData').get(async function(){
     const currTime = Math.round((new Date()).getTime() / 1000);
     const yearAgoTime = Math.round((new Date()).getTime() / 1000) - 365*24*60*60;
     try{
         const res = await axios.get(`https://finnhub.io/api/v1/stock/candle?symbol=${this.ticker}&resolution=D&from=${yearAgoTime}&to=${currTime}&token=${process.env.FINNHUB_API_KEY}`);
-        console.log(res)
         const prices = res.data.c;
         const timeStamps = res.data.t;
 
@@ -99,7 +88,25 @@ StockSchema.virtual('oneYearCandleData').get(async function(){
         return {prices, dates};
 
     } catch(e){
-        next(e);
+        throw new ExpressError("There has been an error obtaining chart prices", 404);
+    }
+})
+
+StockSchema.virtual('returnsYTD').get(async function(){
+
+    const currYear = (new Date()).getFullYear();
+    const startOfYear = new Date(`1/1/${currYear}`)/1000;
+    try{
+        const res = await axios.get(`https://finnhub.io/api/v1/stock/candle?symbol=${this.ticker}&resolution=D&from=${startOfYear}&to=${startOfYear+5*60*60*24}&token=${process.env.FINNHUB_API_KEY}`);
+        const startOfYearPrice = res.data.c[0]; //first day of the year
+        const {currPrice} = await this.currentPriceAndReturns;
+
+        const ytdStockReturns = 100*(currPrice / startOfYearPrice) -100;
+
+        return ytdStockReturns.toFixed(2);
+
+    } catch(e){
+        throw new ExpressError("There has been an error obtaining chart prices", 404);
     }
 })
 
