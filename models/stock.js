@@ -1,6 +1,16 @@
+// if (process.env.NODE_ENV !== "production") {
+//     require('dotenv').config();
+// }
+//I guess I don't need it, I only need to put it one time on my app.js page I think
+
+//Yahoo stock prices
 const yahooStockPrices = require('yahoo-stock-prices');
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+
+//Axios
+const axios = require('axios');
 
 const ImageSchema = new Schema({
     url: String,
@@ -50,17 +60,48 @@ const StockSchema = new Schema({
 
 //DO NOT WRAP WITH CATCH ASYNC, BECAUSE CATCH ASYNC USES ARROW FUNCTIONS, WHICH USES ".this" differently!
 StockSchema.virtual('currentPrice').get (async function () {
-    const currPrice = await yahooStockPrices.getCurrentPrice(this.ticker);
-    return currPrice;
+    try{
+        const currPrice = await yahooStockPrices.getCurrentPrice(this.ticker);
+        return currPrice;
+    } catch(e){
+        next(e);
+    }
+
 });
 
 // Virtual with returns
 //DO NOT WRAP WITH CATCH ASYNC, BECAUSE CATCH ASYNC USES ARROW FUNCTIONS, WHICH USES ".this" differently!
 StockSchema.virtual('returns').get(async function(){
-    const currPrice = await yahooStockPrices.getCurrentPrice(this.ticker);
-    const stockReturns = 100*(currPrice / this.price) -100;
-    return stockReturns.toFixed(2); //rounds to 2 decimal places.
+    try{
+        const currPrice = await this.currentPrice;
+        const stockReturns = 100*(currPrice / this.price) -100;
+        return stockReturns.toFixed(2); //rounds to 2 decimal places.
+    } catch(e){
+        next(e);
+    }
+
 });
+
+StockSchema.virtual('oneYearCandleData').get(async function(){
+    const currTime = Math.round((new Date()).getTime() / 1000);
+    const yearAgoTime = Math.round((new Date()).getTime() / 1000) - 365*24*60*60;
+    try{
+        const res = await axios.get(`https://finnhub.io/api/v1/stock/candle?symbol=${this.ticker}&resolution=D&from=${yearAgoTime}&to=${currTime}&token=${process.env.FINNHUB_API_KEY}`);
+        console.log(res)
+        const prices = res.data.c;
+        const timeStamps = res.data.t;
+
+        const dates = timeStamps.map(unixTimeStamp => {
+            const date = new Date(unixTimeStamp * 1000)
+            return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+        });
+
+        return {prices, dates};
+
+    } catch(e){
+        next(e);
+    }
+})
 
 
 module.exports = mongoose.model('Stock', StockSchema);

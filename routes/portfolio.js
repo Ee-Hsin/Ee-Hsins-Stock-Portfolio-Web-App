@@ -42,7 +42,9 @@ router.get('/:id', catchAsync(async (req, res,) => {
     }
     const currentPrice = await stock.currentPrice;
     const returns = await stock.returns;
-    res.render('portfolio/show', { stock, currentPrice, returns });
+    const candleData = await stock.oneYearCandleData;
+
+    res.render('portfolio/show', { stock, currentPrice, returns, candleData});
 }));
 
 router.get('/:id/edit', isLoggedIn, isAdmin, catchAsync(async (req, res,) => {

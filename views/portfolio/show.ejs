@@ -1,6 +1,5 @@
 <% layout('layouts/boilerplate')%>
-
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 <ul>
     <li>Name: <%= stock.name %></li>
     <li>Ticker: <%= stock.ticker %></li>
@@ -17,7 +16,9 @@
     <li>Category: <%= stock.category %></li>
     <li>Description: <%= stock.description %></li>
 </ul>
-</ul>
+
+<canvas id="chart" width="200" height = "200"></canvas>
+
 <div id="stockCarousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         <% stock.images.forEach((img, i) => {  %>
@@ -49,5 +50,9 @@
   <% } %>
     <a href="/portfolio">Back to Portfolio</a>
 </div>
+<script>
+    const chartData = <%- JSON.stringify(candleData) %>;
+</script>
+<script src="/javascripts/chartingData.js"></script>
 
 
