@@ -1,3 +1,6 @@
+
+let failedSubmission = false;
+
 (function () {
     'use strict'
 
@@ -9,14 +12,18 @@
         .forEach(function (form) {
             form.addEventListener('submit', function (event) {
                 if (!form.checkValidity()) {
+                    failedSubmission= true;
                     event.preventDefault()
                     event.stopPropagation()
+                } else{
+                    failedSubmission=false;
                 }
-
+                
                 form.classList.add('was-validated')
             }, false)
         })
 })()
+
 
 function validation() {
     const email = document.querySelector('#email');
