@@ -26,11 +26,9 @@
                     <% for (let stock of stocks) {%>
                         <div class="card col-md-6 col-lg-4" style="font-size: 1rem">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <img class="img-fluid" alt="" src="<%=stock.images[0].url%>">
-                                </div>
-                                <div class="col-md-8">
+                                <div class="col">
                                     <div class="card-body">
+                                        <img class="img-fluid mb-2" alt="" src="<%=stock.images[0].url%>">
                                         <h5 class="card-title"><%= stock.name %> --> <small class="text-muted">(<%= stock.category%>)</small></h5>
                                         <p class="card-text">
                                             Ticker Symbol: <%= stock.ticker %>
