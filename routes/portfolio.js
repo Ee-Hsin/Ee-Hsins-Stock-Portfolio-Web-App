@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router({ mergeParams: true });
 const catchAsync = require('../utils/catchAsync');
 
+const compare = require('../utils/compareFunction')
+
 const multer  = require('multer');
 const { storage, cloudinary } = require('../cloudinary');
 const upload = multer({ storage });
@@ -14,6 +16,8 @@ const Stock = require('../models/stock')//can ship this off to individual route 
 router.get('/', catchAsync(async (req, res) => {
     const stocks = await Stock.find({});
     //Add a sorting method here.
+    stocks.sort(compare);
+
     const returns =[];
     for (let stock of stocks){
         let stockReturn = await stock.returns;
