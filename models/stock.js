@@ -76,7 +76,9 @@ StockSchema.virtual('oneYearCandleData').get(async function(){
     const currTime = Math.round((new Date()).getTime() / 1000);
     const yearAgoTime = Math.round((new Date()).getTime() / 1000) - 365*24*60*60;
     try{
-        const res = await axios.get(`https://finnhub.io/api/v1/stock/candle?symbol=${this.ticker}&resolution=D&from=${yearAgoTime}&to=${currTime}&token=${process.env.FINNHUB_API_KEY}`);
+        console.log("Started requesting for candleData");
+        const res = await axios.get(`https://finnhub.io/api/v1/stock/candle?symbol=${this.ticker}&resolution=W&from=${yearAgoTime}&to=${currTime}&token=${process.env.FINNHUB_API_KEY}`);
+        console.log("Requesting complete");
         const prices = res.data.c;
         const timeStamps = res.data.t;
 
@@ -88,6 +90,7 @@ StockSchema.virtual('oneYearCandleData').get(async function(){
         return {prices, dates};
 
     } catch(e){
+        //can't use next() (I kinda forgot), that is only for async functions invoked by middleware and route handlers, this is not that case.
         throw new ExpressError("There has been an error obtaining chart prices", 404);
     }
 })
@@ -109,6 +112,22 @@ StockSchema.virtual('returnsYTD').get(async function(){
         throw new ExpressError("There has been an error obtaining chart prices", 404);
     }
 })
+
+// StockSchema.virtual('financials').get(async function(){
+//     try{
+//         const res = await axios.get(`https://finnhub.io/api/v1/stock/metric?symbol=${this.ticker}&metric=all&token=${process.env.FINNHUB_API_KEY}`);
+//         console.log(res.data.metric.currentRatioQuarterly);
+//         console.log(res.data.metric["totalDebt/totalEquityQuarterly"]/100);
+//         console.log(res.data.metric["longTermDebt/equityQuarterly"]/100);
+//         console.log(res.data.metric.roeRfy);
+//         console.log(res.data.metric.epsGrowth5Y);
+//         console.log(res.data.series.annual.netMargin);
+        
+//     } catch(e){
+//         throw new ExpressError("There has been an error obtaining financial data", 404);
+//     }
+
+// })
 
 
 module.exports = mongoose.model('Stock', StockSchema);

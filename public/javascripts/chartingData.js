@@ -1,8 +1,6 @@
 const {prices, dates} = chartData;
 function chartIt(){
 
-    console.log(prices);
-    console.log(dates);
     const ctx = document.getElementById('chart').getContext('2d');
     const chart = new Chart(ctx, {
         type: 'line',
@@ -22,8 +20,7 @@ function chartIt(){
         },
     });
 } 
-console.log("Prices:", prices);
-console.log("Dates:", dates);
+
 if (prices && dates){
     chartIt();
 }

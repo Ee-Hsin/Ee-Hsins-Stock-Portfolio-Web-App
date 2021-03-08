@@ -31,10 +31,13 @@ body {
 
 .secondary-title{
     padding: 0.1rem;
-    border-bottom: rgba(110, 88, 74, 0.8) solid 0.1rem;
 }
 .secondary-title h2{
     font-size:1.7rem;
+}
+
+.bottom-border{
+    border-bottom: rgba(139, 118, 105, 0.8) solid 0.1rem;
 }
 
 
@@ -75,13 +78,12 @@ h2 a:link {
 }
 
 .performance-section .returns-positive{
-    font-size: max(3rem,7vw);
+    font-size: max(3rem,5vw);
     color: #206303;
 }
 
 .performance-section .returns-negative{
-    font-size: max(3rem,7vw);
-    
+    font-size: max(3rem,5vw);
     color: #b51a28;
 }
 

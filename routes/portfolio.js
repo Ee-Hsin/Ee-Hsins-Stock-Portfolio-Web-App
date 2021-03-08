@@ -49,9 +49,10 @@ router.get('/:id', catchAsync(async (req, res,) => {
 
     const candleData = await stock.oneYearCandleData;
     stock.vReturnsYTD = await stock.returnsYTD;
-
     //adding discount to stock
     stock.discount = (((parseFloat(stock.IV)/stock.vCurrentPrice)-1) * -100).toFixed(2) || "N/A";
+
+    // await stock.financials;
 
     res.render('portfolio/show', { stock, candleData});
 }));
