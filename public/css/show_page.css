@@ -22,11 +22,12 @@ body {
 }
 
 .title h1{
-    font-size: 3.5rem; 
+    font-size: max(3rem,3.5vw);
 }
 
 .title h2{
     font-size: max(1.5rem,2vw);
+    text-align: right;
 }
 
 .secondary-title{
@@ -40,7 +41,6 @@ body {
     border-bottom: rgba(139, 118, 105, 0.8) solid 0.1rem;
 }
 
-
 /* Designing the Ticker Symbol link (Need to follow this LoVe Fears HAte format) */
 h2 a {
     outline: none;
@@ -52,12 +52,12 @@ h2 a {
   }
   
 h2 a:link {
-    color: rgba(189, 126, 85, 0.8);
+    color: rgba(54, 37, 25, 0.8);
     text-decoration: none;
   }
   
   a:visited {
-    color: rgba(189, 126, 85, 0.8);
+    color: rgba(54, 37, 25, 0.8);
     text-decoration: none;
   }
   
@@ -70,11 +70,11 @@ h2 a:link {
   }
   
   a:active {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(235, 216, 216, 0.8);
   }
 
 .performance-section .returns-label{
-    font-size: 2.6rem;
+    font-size: max(2.2rem,3vw);
 }
 
 .performance-section .returns-positive{

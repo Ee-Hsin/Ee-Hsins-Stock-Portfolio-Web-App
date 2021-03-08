@@ -11,7 +11,8 @@ const upload = multer({ storage });
 const { validateStock, isLoggedIn, isAdmin } = require('../middleware.js');
 
 const ExpressError = require('../utils/ExpressError');
-const Stock = require('../models/stock')//can ship this off to individual route files.
+const Stock = require('../models/stock');//can ship this off to individual route files.
+const { response } = require('express');
 
 router.get('/', catchAsync(async (req, res) => {
     const stocks = await Stock.find({});
@@ -37,7 +38,7 @@ router.post('/', isLoggedIn, isAdmin, upload.array('image'), validateStock, catc
     res.redirect(`/portfolio/${stock._id}`)
 }));
 
-router.get('/:id', catchAsync(async (req, res,) => {
+router.get('/:id', catchAsync(async (req, res) => {
     const stock = await Stock.findById(req.params.id);
     if (!stock){
         req.flash('error', 'Cannot find that Stock!');
@@ -46,17 +47,22 @@ router.get('/:id', catchAsync(async (req, res,) => {
     const {currPrice,stockReturns} = await stock.currentPriceAndReturns;
     stock.vCurrentPrice = currPrice;
     stock.vReturns = stockReturns;
-
-    const candleData = await stock.oneYearCandleData;
     stock.vReturnsYTD = await stock.returnsYTD;
     //adding discount to stock
     stock.discount = (((parseFloat(stock.IV)/stock.vCurrentPrice)-1) * -100).toFixed(2) || "N/A";
-
+    //adding financials to stock
     stock.financials = await stock.financialInfo;
-    console.log(stock.financials);
 
-    res.render('portfolio/show', { stock, candleData});
+    res.render('portfolio/show', {stock});
 }));
+
+//Response to client side to send Candlestick data
+router.get('/:id/getChartData', catchAsync(async (req,res) => {
+    const stock = await Stock.findById(req.params.id);
+    const candleData = await stock.oneYearCandleData;
+    console.log("Candle data", candleData);
+    res.send(candleData);
+}))
 
 router.get('/:id/edit', isLoggedIn, isAdmin, catchAsync(async (req, res,) => {
     const stock = await Stock.findById(req.params.id);

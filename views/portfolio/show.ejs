@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Economica:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/navbar_footer.css">
     <link rel="stylesheet" href="/css/show_page.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 
 </head>
@@ -18,14 +19,14 @@
     <%- include('../partials/navbar')%>
     <main class="container my-5 ">
         <%- include('../partials/flash')%>
-        <div class="container-fluid main-block">
+        <div class="container-fluid main-block p-5">
             <div class="row">
                 <div class="col-md-5">
                     <div class="row title">
                         <div class="col-md-4 mb-0">
                             <h1><%= stock.name %></h1>
                         </div>
-                        <div class="col-md-7 offset-md-1 mt-auto mb-0">
+                        <div class="col-md-5 col-lg-7 offset-md-1 mt-auto mb-0 ticker">
                             <h2 class="pb-0"> (Ticker: <a href = "https://finance.yahoo.com/quote/<%=stock.ticker%>"><%= stock.ticker %></a>)</h2>
                         </div>
                     </div>
@@ -121,9 +122,6 @@
             <a href="/portfolio/<%= stock._id%>/edit">Edit Stock</a>
           <% } %>
         </div>
-        <script>
-            const chartData = <%- JSON.stringify(candleData) %>;
-        </script>
         <script src="/javascripts/chartingData.js"></script>
     </main>
     <%- include('../partials/footer')%>

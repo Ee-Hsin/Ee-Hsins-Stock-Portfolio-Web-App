@@ -1,5 +1,4 @@
-const {prices, dates} = chartData;
-function chartIt(){
+function chartIt(prices,dates){
 
     const ctx = document.getElementById('chart').getContext('2d');
     const chart = new Chart(ctx, {
@@ -21,6 +20,16 @@ function chartIt(){
     });
 } 
 
-if (prices && dates){
-    chartIt();
+async function getChartData() {
+    console.log(window.location.pathname);
+    const pathArray = window.location.pathname.split('/');
+    const id = pathArray[2];
+    console.log(id);
+    console.log(`/${id}/getChartData`);
+    const res = await axios.get(`/portfolio/${id}/getChartData`);
+    chartIt(res.data.prices,res.data.dates);
 }
+
+
+getChartData();
+
