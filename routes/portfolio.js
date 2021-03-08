@@ -19,10 +19,6 @@ router.get('/', catchAsync(async (req, res) => {
     //Add a sorting method here.
     stocks.sort(compare);
 
-    for (let stock of stocks){
-        const {stockReturns} = await stock.currentPriceAndReturns;
-        stock.vReturns = stockReturns;
-    }
     res.render('portfolio/index', {stocks})
 }));
 
@@ -56,12 +52,18 @@ router.get('/:id', catchAsync(async (req, res) => {
     res.render('portfolio/show', {stock});
 }));
 
-//Response to client side to send Candlestick data
+//My API Response to client side to send Candlestick data
 router.get('/:id/getChartData', catchAsync(async (req,res) => {
     const stock = await Stock.findById(req.params.id);
     const candleData = await stock.oneYearCandleData;
-    console.log("Candle data", candleData);
     res.send(candleData);
+}))
+
+//My API Response to client side to send Returns data
+router.get('/:id/getReturns', catchAsync(async (req,res) => {
+    const stock = await Stock.findById(req.params.id);
+    const {stockReturns} = await stock.currentPriceAndReturns;
+    res.send(stockReturns);
 }))
 
 router.get('/:id/edit', isLoggedIn, isAdmin, catchAsync(async (req, res,) => {

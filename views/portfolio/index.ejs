@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Economica:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">   
     <link rel="stylesheet" href="/css/default.css">
     <link rel="stylesheet" href="/css/navbar_footer.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 
 <body class="d-flex flex-column vh-100">
@@ -27,14 +29,15 @@
                         <div class="card col-md-6 col-lg-4" style="font-size: 1rem">
                             <div class="row">
                                 <div class="col">
-                                    <div class="card-body">
+                                    <div class="card-body" id ="<%= stock._id %>">
                                         <img class="img-fluid mb-2" alt="" src="<%=stock.images[0].url%>">
                                         <h5 class="card-title"><%= stock.name %> --> <small class="text-muted">(<%= stock.category%>)</small></h5>
                                         <p class="card-text">
-                                            Ticker Symbol: <%= stock.ticker %>
+                                            Ticker Symbol: <%= stock.ticker %> 
                                         </p>
                                         <p><%= stock.description.split(' ').slice(0,6).join(' ') + '...' %></p>
-                                        <p>My Returns: <b style = <%= stock.vReturns>0 ? `color:#4ca54c` : "color:#b51a28"%>><%= stock.vReturns %>%</b></p>
+                                        <!--Run a function here where you take stock.ticker, make a request to API, and then get the returns from there.-->
+                                        <p>My Returns: <b style ="color: #84898a">Loading...</b></p>
                                         <a class="btn btn-primary" href="/portfolio/<%=stock._id%>">View <%=stock.name%></a>
                                     </div>
                                 </div>
@@ -53,6 +56,7 @@
         crossorigin="anonymous"></script>
         
     <script src="/javascripts/validateForms.js"></script>
+    <script src="/javascripts/loadingReturns.js"></script>
 </body>
 
 </html>
