@@ -98,6 +98,16 @@
                     <canvas id="chart" width="100" height = "100"></canvas>
                 </div>
             </div>
+            <HR style = "border-bottom: outset rgba(234,187,155,255) solid 0.15rem;">
+            <div class="row">
+                <ul>
+                    <li>Current Ratio: <%=stock.financials.currentRatio%></li>
+                    <li>Debt/Equity: <%=stock.financials.debtOverEquity%></li>
+                    <li>LT Debt/Equity: <%=stock.financials.longTermDebtOverEquity%></li>
+                    <li>ROE: <%=stock.financials.returnOnEquity%></li>
+                    <li>EPS Growth Past 5Y: <%=stock.financials.epsPast5Y%></li>
+                </ul>
+            </div>
         </div>
         <a href="/portfolio">Back to Portfolio</a>
 

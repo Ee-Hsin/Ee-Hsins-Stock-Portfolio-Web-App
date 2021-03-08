@@ -52,7 +52,8 @@ router.get('/:id', catchAsync(async (req, res,) => {
     //adding discount to stock
     stock.discount = (((parseFloat(stock.IV)/stock.vCurrentPrice)-1) * -100).toFixed(2) || "N/A";
 
-    // await stock.financials;
+    stock.financials = await stock.financialInfo;
+    console.log(stock.financials);
 
     res.render('portfolio/show', { stock, candleData});
 }));

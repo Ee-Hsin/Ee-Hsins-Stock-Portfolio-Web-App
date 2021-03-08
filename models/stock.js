@@ -62,11 +62,13 @@ const StockSchema = new Schema({
 //DO NOT WRAP WITH CATCH ASYNC, BECAUSE CATCH ASYNC USES ARROW FUNCTIONS, WHICH USES ".this" differently!
 StockSchema.virtual('currentPriceAndReturns').get (async function () {
     try{
-        const currPrice = await yahooStockPrices.getCurrentPrice(this.ticker);
+        // const res = await axios.get(`https://sandbox.iexapis.com/stable/stock/${this.ticker}/quote/latestPrice?token=${process.env.IEX_CLOUD_SANDBOX_KEY}`);
+        // const currPrice = res.data;
+        const currPrice = await yahooStockPrices.getCurrentPrice(this.ticker); //Yahoo is much faster and we don't have to worry about using tokens.
         const stockReturns = (100*(currPrice / this.price) -100).toFixed(2);
         return {currPrice, stockReturns};
     } catch(e){
-        throw new ExpressError("There has been an error obtaining prices", 404);
+        throw new ExpressError(`There has been an error obtaining current prices. Error message is: ${e}`, 404);
     }
 
 });
@@ -76,18 +78,20 @@ StockSchema.virtual('oneYearCandleData').get(async function(){
     const currTime = Math.round((new Date()).getTime() / 1000);
     const yearAgoTime = Math.round((new Date()).getTime() / 1000) - 365*24*60*60;
     try{
-        console.log("Started requesting for candleData");
-        const res = await axios.get(`https://finnhub.io/api/v1/stock/candle?symbol=${this.ticker}&resolution=W&from=${yearAgoTime}&to=${currTime}&token=${process.env.FINNHUB_API_KEY}`);
-        console.log("Requesting complete");
-        const prices = res.data.c;
-        const timeStamps = res.data.t;
 
-        const dates = timeStamps.map(unixTimeStamp => {
-            const date = new Date(unixTimeStamp * 1000)
-            return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
-        });
+        const res = await axios.get(`https://sandbox.iexapis.com/stable/stock/${this.ticker}/chart/1y?chartCloseOnly=true&chartInterval=5&token=${process.env.IEX_CLOUD_SANDBOX_KEY}`);
+        /* For when deploying:
+        const res = await axios.get(`https://cloud.iexapis.com/stable/stock/${this.ticker}/chart/1y?chartCloseOnly=true&chartInterval=5&token=${process.env.IEX_CLOUD_API_KEY}`);*/
 
-        return {prices, dates};
+        const prices = res.data.map((candle) => {
+            return candle.close;
+        })
+
+        const dates = res.data.map((candle) => {
+            return candle.date;
+        })
+
+        return {prices,dates};
 
     } catch(e){
         //can't use next() (I kinda forgot), that is only for async functions invoked by middleware and route handlers, this is not that case.
@@ -113,21 +117,23 @@ StockSchema.virtual('returnsYTD').get(async function(){
     }
 })
 
-// StockSchema.virtual('financials').get(async function(){
-//     try{
-//         const res = await axios.get(`https://finnhub.io/api/v1/stock/metric?symbol=${this.ticker}&metric=all&token=${process.env.FINNHUB_API_KEY}`);
-//         console.log(res.data.metric.currentRatioQuarterly);
-//         console.log(res.data.metric["totalDebt/totalEquityQuarterly"]/100);
-//         console.log(res.data.metric["longTermDebt/equityQuarterly"]/100);
-//         console.log(res.data.metric.roeRfy);
-//         console.log(res.data.metric.epsGrowth5Y);
-//         console.log(res.data.series.annual.netMargin);
-        
-//     } catch(e){
-//         throw new ExpressError("There has been an error obtaining financial data", 404);
-//     }
+StockSchema.virtual('financialInfo').get(async function(){
+    try{
+        const res = await axios.get(`https://finnhub.io/api/v1/stock/metric?symbol=${this.ticker}&metric=all&token=${process.env.FINNHUB_API_KEY}`);
+        const currentRatio = res.data.metric.currentRatioQuarterly.toFixed(2);
+        const debtOverEquity = (res.data.metric["totalDebt/totalEquityQuarterly"]/100).toFixed(2);
+        const longTermDebtOverEquity = (res.data.metric["longTermDebt/equityQuarterly"]/100).toFixed(2);
+        const returnOnEquity = res.data.metric.roeRfy.toFixed(2);
+        const epsPast5Y = res.data.metric.epsGrowth5Y.toFixed(2);
+        const historicalEps = res.data.series.annual.eps;
 
-// })
+        return {currentRatio, debtOverEquity, longTermDebtOverEquity, returnOnEquity, epsPast5Y, historicalEps};
+        
+    } catch(e){
+        throw new ExpressError("There has been an error obtaining financial data", 404);
+    }
+
+})
 
 
 module.exports = mongoose.model('Stock', StockSchema);
