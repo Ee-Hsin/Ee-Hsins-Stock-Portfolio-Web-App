@@ -123,10 +123,14 @@ StockSchema.virtual('financialInfo').get(async function(){
         const currentRatio = res.data.metric.currentRatioQuarterly.toFixed(2);
         const debtOverEquity = (res.data.metric["totalDebt/totalEquityQuarterly"]/100).toFixed(2);
         const longTermDebtOverEquity = (res.data.metric["longTermDebt/equityQuarterly"]/100).toFixed(2);
-        const returnOnEquity = res.data.metric.roeRfy.toFixed(2);
+        let returnOnEquity = res.data.metric.roeRfy;
+        if (!returnOnEquity){
+            returnOnEquity = "Negative Equity"
+        } else{
+            returnOnEquity = returnOnEquity.toFixed(2) +"%";
+        }
         const epsPast5Y = res.data.metric.epsGrowth5Y.toFixed(2);
         const historicalEps = res.data.series.annual.eps.slice(0,5);
-        console.log(historicalEps);
 
         return {currentRatio, debtOverEquity, longTermDebtOverEquity, returnOnEquity, epsPast5Y, historicalEps};
         

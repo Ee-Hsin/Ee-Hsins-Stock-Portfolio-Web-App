@@ -89,7 +89,7 @@
             <div class="row mb-3 pb-2 bottom-border">
                 <div class="col-md-3">
                     <h3>Return on Equity: </h3>
-                    <h3 class = "ROE"><%=stock.financials.returnOnEquity%>%</h3>
+                    <h3 class = "ROE"><%=stock.financials.returnOnEquity%></h3>
                     <details> <summary class = "bottom-border">Criteria for ROE</summary>
                         An ROE of 15% and above is a great business. Though note, some great business (like Mcdonalds and most restaurant
                         companies) will fail this step due to having negative equity as they are taking on lots of LT debt to take 
@@ -117,6 +117,8 @@
                         <% } %> 
                         <details> <summary class = "bottom-border">Criteria for Debt/Equity</summary>
                             In most cases, it should not exceed 1.50 to be safe, but it more so depends on how good the Debt/EBITDA ratio is.
+                            <b>Note:</b> If it is 0.00, check the ROE to see if Equity is Negative. A Debt/Equity ratio fo 0.00, either means the company has no debt,
+                            or it has negative equity.
                         </details>
                     </div>
                 </div>

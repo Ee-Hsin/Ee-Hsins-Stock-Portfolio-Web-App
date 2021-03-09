@@ -41,9 +41,7 @@ router.get('/:id', catchAsync(async (req, res) => {
         return res.redirect('/portfolio')
     }
     //Adding financials to stock
-    console.log("Getting Financial Info");
     stock.financials = await stock.financialInfo;
-    console.log("Done!");
 
     res.render('portfolio/show', {stock});
 }));
