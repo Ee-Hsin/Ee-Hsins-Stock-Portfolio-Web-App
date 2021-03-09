@@ -40,14 +40,10 @@ router.get('/:id', catchAsync(async (req, res) => {
         req.flash('error', 'Cannot find that Stock!');
         return res.redirect('/portfolio')
     }
-    const {currPrice,stockReturns} = await stock.currentPriceAndReturns;
-    stock.vCurrentPrice = currPrice;
-    stock.vReturns = stockReturns;
-    stock.vReturnsYTD = await stock.returnsYTD;
-    //adding discount to stock
-    stock.discount = (((parseFloat(stock.IV)/stock.vCurrentPrice)-1) * -100).toFixed(2) || "N/A";
-    //adding financials to stock
+    //Adding financials to stock
+    console.log("Getting Financial Info");
     stock.financials = await stock.financialInfo;
+    console.log("Done!");
 
     res.render('portfolio/show', {stock});
 }));
@@ -60,10 +56,23 @@ router.get('/:id/getChartData', catchAsync(async (req,res) => {
 }))
 
 //My API Response to client side to send Returns data
-router.get('/:id/getReturns', catchAsync(async (req,res) => {
+router.get('/:id/getCurrentPriceAndReturns', catchAsync(async (req,res) => {
     const stock = await Stock.findById(req.params.id);
-    const {stockReturns} = await stock.currentPriceAndReturns;
-    res.send(stockReturns);
+    const currentPriceAndReturns = await stock.currentPriceAndReturns;
+    res.send(currentPriceAndReturns);
+}))
+//My API Response to client side to send ReturnsYTD data
+router.get('/:id/getReturnsYTD', catchAsync(async (req,res) => {
+    const stock = await Stock.findById(req.params.id);
+    const returnsYTD = await stock.returnsYTD;
+    res.send(returnsYTD);
+}))
+
+//My API Response to client side to send IV data
+router.get('/:id/getIV', catchAsync(async (req,res) => {
+    const stock = await Stock.findById(req.params.id);
+    const IV = await stock.IV;
+    res.send(IV);
 }))
 
 router.get('/:id/edit', isLoggedIn, isAdmin, catchAsync(async (req, res,) => {

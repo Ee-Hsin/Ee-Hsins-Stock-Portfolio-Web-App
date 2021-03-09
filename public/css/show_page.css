@@ -73,16 +73,16 @@ h2 a:link {
     background: rgba(235, 216, 216, 0.8);
   }
 
-.performance-section .returns-label{
+.returns-label{
     font-size: max(2.2rem,3vw);
 }
 
-.performance-section .returns-positive{
+.returns-positive{
     font-size: max(3rem,5vw);
     color: #206303;
 }
 
-.performance-section .returns-negative{
+.returns-negative{
     font-size: max(3rem,5vw);
     color: #b51a28;
 }
@@ -98,4 +98,22 @@ h2 a:link {
 
 .overvalued {
     color: #b43944;
+}
+
+.ROE{
+    color: #527fc2;
+    font-weight: 700;
+    font-size: calc(2.5rem + .8vw);
+}
+
+.debt-bad{
+    color: #af0a04;
+    font-size: calc(2.5rem + .8vw);
+
+}
+
+.debt-good{
+    color: #5c9c70;
+    font-size: calc(2.5rem + .8vw);
+
 }

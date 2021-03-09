@@ -1,6 +1,6 @@
-function chartIt(prices,dates){
+function chartPrices(prices,dates){
 
-    const ctx = document.getElementById('chart').getContext('2d');
+    const ctx = document.getElementById('priceChart').getContext('2d');
     const chart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -20,16 +20,36 @@ function chartIt(prices,dates){
     });
 } 
 
-async function getChartData() {
-    console.log(window.location.pathname);
+function chartEps(eps,dates){
+
+    const ctx = document.getElementById('epsChart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: 'Earnings Per Share',
+                data: eps,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(0, 0, 0, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+    });
+} 
+
+async function getPriceChartData() {
     const pathArray = window.location.pathname.split('/');
     const id = pathArray[2];
-    console.log(id);
-    console.log(`/${id}/getChartData`);
     const res = await axios.get(`/portfolio/${id}/getChartData`);
-    chartIt(res.data.prices,res.data.dates);
+    chartPrices(res.data.prices,res.data.dates);
 }
 
 
-getChartData();
+getPriceChartData();
+chartEps([1,2,3,4,5],[5,6,7,8,9]);
 

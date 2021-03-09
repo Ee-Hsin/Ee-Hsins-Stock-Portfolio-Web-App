@@ -125,7 +125,8 @@ StockSchema.virtual('financialInfo').get(async function(){
         const longTermDebtOverEquity = (res.data.metric["longTermDebt/equityQuarterly"]/100).toFixed(2);
         const returnOnEquity = res.data.metric.roeRfy.toFixed(2);
         const epsPast5Y = res.data.metric.epsGrowth5Y.toFixed(2);
-        const historicalEps = res.data.series.annual.eps;
+        const historicalEps = res.data.series.annual.eps.slice(0,5);
+        console.log(historicalEps);
 
         return {currentRatio, debtOverEquity, longTermDebtOverEquity, returnOnEquity, epsPast5Y, historicalEps};
         
