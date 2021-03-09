@@ -32,7 +32,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-5 mr-2 mb-2 secondary-title bottom-border pb-0">
-                            <h2 id = "currentPrice" style ="color: #84898a">Loading...</h2>
+                            <h2 id = "currentPrice" class = "loading">Loading...</h2>
                             <% if(!currentUser) {%>
                                 <h2>Intrinsic Value: N/A</h2>
                             <% } %> 
@@ -46,7 +46,7 @@
                                     <h2>LOGIN TO VIEW INTRINSIC VALUE</h2>
                                     <% } %> 
                                 <% if(currentUser) {%>
-                                    <h2 id = "discount">Current Discount: <span style = "color: #84898a">Loading...</span></h2>
+                                    <h2 id = "discount">Current Discount: <span class = "loading">Loading...</span></h2>
                                 <% }%>
                             </div>
                         </div>
@@ -56,11 +56,11 @@
                     <div class="row performance-section">
                         <div class="col-md-5 offset-md-1 mr-2">
                             <h2 class="returns-label">Performance YTD:</h2>
-                            <h2 style ="color: #84898a">Loading...</h2>
+                            <h2 class = "loading">Loading...</h2>
                         </div>
                         <div class="col-md-4 mr-2">
                             <h2 class="returns-label">Total Returns:</h2>
-                            <h2 style ="color: #84898a">Loading...</h2>
+                            <h2 class = "loading">Loading...</h2>
                         </div>
                     </div>
                 </div>

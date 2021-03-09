@@ -117,3 +117,7 @@ h2 a:link {
     font-size: calc(2.5rem + .8vw);
 
 }
+
+.loading{
+    color: #84898a;
+}

@@ -31,12 +31,13 @@ async function addReturnsPriceAndDiscount() {
     const {currPrice, stockReturns} = await getCurrentPriceAndReturns();
     const returnsYTD = await getReturnsYTD();
 
+    //If IV is shown, this adds the Discount.
     if (selectedIV){
         const IV = await getIV();
         const discount = (((parseFloat(IV)/currPrice)-1) * -100).toFixed(2);
         const selectedDiscount = document.querySelector('#discount');
 
-        selectedDiscount.children[0].style.color = "";
+        selectedDiscount.children[0].classList.remove('loading');//LOADING
         selectedDiscount.children[0].innerText = discount + '%';
 
         if (discount < 0.25){
@@ -48,16 +49,20 @@ async function addReturnsPriceAndDiscount() {
             selectedDiscount.children[0].innerText += '(overvalued)';
 
         }
-    }
+    }  
 
-    selectedCurrPrice.style.color = "";
+
+    //This adds the current price
+    selectedCurrPrice.classList.remove('loading');//LOADING
     selectedCurrPrice.innerText = "Current Price: $" + currPrice;
 
+    //This adds the performance/returns
     const selectedReturnsYTD = performanceSection.children[0].children[1];
     const selectedStockReturns = performanceSection.children[1].children[1];
 
-    selectedReturnsYTD.style.color ="";
-    selectedStockReturns.style.color ="";
+    //Removes styles from the loading... sign
+    selectedReturnsYTD.classList.remove('loading');//LOADING
+    selectedStockReturns.classList.remove('loading');//LOADING
 
     if(returnsYTD >= 0){
         selectedReturnsYTD.innerText = "+" + returnsYTD + "%";
@@ -74,18 +79,6 @@ async function addReturnsPriceAndDiscount() {
         selectedStockReturns.innerText = stockReturns + "%";
         selectedStockReturns.classList.add('returns-negative');
     }
-    // for (let cardBody of cardBodies){
-    //     const returns = await getReturns(cardBody.id);
-    //     // console.log(cardBody.id, returns)
-    //     const returnsString = returns + '%';
-    //     cardBody.children[4].children[0].innerText = returnsString;
-
-    //     if (returns >0){
-    //         cardBody.children[4].children[0].style.color = "#4ca54c"
-    //     } else {
-    //         cardBody.children[4].children[0].style.color = "#b51a28"
-    //     }
-    // }
 }
 
 addReturnsPriceAndDiscount();
