@@ -82,6 +82,11 @@ h2 a:link {
     color: #206303;
 }
 
+.returns-neutral{
+    font-size: max(3rem,5vw);
+    color: #15290d;
+}
+
 .returns-negative{
     font-size: max(3rem,5vw);
     color: #b51a28;

@@ -139,11 +139,13 @@
             <div class="row">
                 <div class="col-md-4">
                     <h3 class = "returns-label">EPS Growth Past 5Y:</h3>
-                    <% if (stock.financials.epsPast5Y >= 5.0){%>
-                        <h3 class = "returns-positive"><%=stock.financials.epsPast5Y%>%</h3>
-                        <%} else {%> 
+                        <% if (stock.financials.epsPast5Y >= 5.0){%>
+                        <h3 class = "returns-positive">+<%=stock.financials.epsPast5Y%>%</h3>
+                        <%} else if (stock.financials.epsPast5Y > 0){%> 
+                        <h3 class = "returns-neutral">+<%=stock.financials.epsPast5Y%>%</h3>
+                        <% } else {%> 
                         <h3 class = "returns-negative"><%=stock.financials.epsPast5Y%>%</h3>
-                    <% } %> 
+                        <% } %> 
                     <details> <summary class = "bottom-border">Criteria for Historical EPS Growth</summary>
                         This really depends on the individual Company. If we're looking at a Large Cap Growth Company, historical earnings growth (in most cases) should be 15%+.
                         If it is a Large Cap Predictable, making it more defensive, anything from 5 to 10% is reasonable. 
