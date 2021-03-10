@@ -1,5 +1,6 @@
 const Stock = require('../models/stock');
 const compare = require('../utils/compareFunction')
+const { storage, cloudinary } = require('../cloudinary');
 
 module.exports.index = async (req, res) => {
     const stocks = await Stock.find({});

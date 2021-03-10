@@ -74,21 +74,21 @@ h2 a:link {
   }
 
 .returns-label{
-    font-size: max(2.2rem,3vw);
+    font-size: calc(1.2rem + 1.6vw);
 }
 
 .returns-positive{
-    font-size: max(3rem,5vw);
+    font-size: calc(2.5rem + 2.3vw);
     color: #206303;
 }
 
 .returns-neutral{
-    font-size: max(3rem,5vw);
+    font-size: calc(2.5rem + 2.3vw);
     color: #15290d;
 }
 
 .returns-negative{
-    font-size: max(3rem,5vw);
+    font-size: calc(2.5rem + 2.3vw);
     color: #b51a28;
 }
 
@@ -125,4 +125,14 @@ h2 a:link {
 
 .loading{
     color: #84898a;
+}
+
+#currentPrice{
+    font-weight: 700;
+}
+
+#restricted{
+    font-size: calc(1.2rem + 0.2vw);
+    font-weight: 700;
+    color:rgb(155, 100, 19)
 }

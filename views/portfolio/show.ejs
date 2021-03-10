@@ -33,17 +33,18 @@
                     <div class="row">
                         <div class="col-md-5 mr-2 mb-2 secondary-title bottom-border pb-0">
                             <h2 id = "currentPrice" class = "loading">Loading...</h2>
-                            <% if(!currentUser) {%>
-                                <h2>Intrinsic Value: N/A</h2>
-                            <% } %> 
-                            <% if(currentUser) {%>
-                            <h2 id = "IV">Intrinsic Value: $<%= stock.IV %></h2>
-                            <% } %> 
+                            <h2>Avg Cost: $<%= stock.price %></h2>
                         </div>
                         <div class="col-md-5 mr-2 mb-2 secondary-title bottom-border">
                             <div class="col pb-0 ">
                                 <% if(!currentUser) {%>
-                                    <h2>LOGIN TO VIEW INTRINSIC VALUE</h2>
+                                    <h2>Intrinsic Value: N/A</h2>
+                                <% } %> 
+                                <% if(currentUser) {%>
+                                <h2 id = "IV">Intrinsic Value: $<%= stock.IV %></h2>
+                                <% } %> 
+                                <% if(!currentUser) {%>
+                                    <h2 id = "restricted">*LOGIN TO VIEW INTRINSIC VALUE*</h2>
                                     <% } %> 
                                 <% if(currentUser) {%>
                                     <h2 id = "discount">Current Discount: <span class = "loading">Loading...</span></h2>
@@ -80,9 +81,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 offset-md-1">
-                    <h3>Last 12 Months Weekly Closing Prices</h3>
-                    <canvas id="priceChart" width="100" height = "100"></canvas>
+                <div class="col-md-7">
+                    <h3>Last 3 years Weekly Closing Prices</h3>
+                    <canvas class = "mr-auto" id="priceChart" height = "60" width = "60"></canvas>
                 </div>
             </div>
             <HR style = "border-bottom: outset rgba(234,187,155,255) solid 0.15rem;">
@@ -135,7 +136,7 @@
                     </details>
                 </div>
                 <div class="col-md-8">
-                    <canvas id="epsChart" width="100" height = "100"></canvas>
+                    <canvas id="epsChart" height = "15" width = "15"></canvas>
                 </div>
             </div>
         </div>

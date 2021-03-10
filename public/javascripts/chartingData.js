@@ -9,7 +9,7 @@ function chartPrices(prices,dates){
                 label: 'Close Price',
                 data: prices,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(0, 0, 0, 0)',
                 ],
                 borderColor: [
                     'rgba(0, 0, 0, 1)',
@@ -17,6 +17,15 @@ function chartPrices(prices,dates){
                 borderWidth: 1
             }]
         },
+        options: {
+            legend: {
+                labels: {
+                    // This more specific font property overrides the global property
+                    fontColor: 'black',
+                    fontFamily: "'Economica', sans-serif"
+                }
+            }
+        }
     });
 } 
 
@@ -31,14 +40,29 @@ function chartEps(eps,dates){
                 label: 'Earnings Per Share',
                 data: eps,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(0, 0, 0, 0.1)',
                 ],
                 borderColor: [
-                    'rgba(0, 0, 0, 1)',
+                    'rgba(0, 0, 0, 0.1)',
                 ],
                 borderWidth: 1
             }]
         },
+        options: {
+            legend: {
+                labels: {
+                    // This more specific font property overrides the global property
+                    fontColor: 'black'
+                }
+            },
+            scales :{
+                yAxes:[{
+                    ticks:{
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
     });
 } 
 

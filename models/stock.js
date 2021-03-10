@@ -79,7 +79,7 @@ StockSchema.virtual('oneYearCandleData').get(async function(){
     const yearAgoTime = Math.round((new Date()).getTime() / 1000) - 365*24*60*60;
     try{
 
-        const res = await axios.get(`https://sandbox.iexapis.com/stable/stock/${this.ticker}/chart/1y?chartCloseOnly=true&chartInterval=5&token=${process.env.IEX_CLOUD_SANDBOX_KEY}`);
+        const res = await axios.get(`https://sandbox.iexapis.com/stable/stock/${this.ticker}/chart/3y?chartCloseOnly=true&chartInterval=5&token=${process.env.IEX_CLOUD_SANDBOX_KEY}`);
         /* For when deploying:
         const res = await axios.get(`https://cloud.iexapis.com/stable/stock/${this.ticker}/chart/1y?chartCloseOnly=true&chartInterval=5&token=${process.env.IEX_CLOUD_API_KEY}`);*/
 
