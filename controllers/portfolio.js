@@ -57,7 +57,13 @@ module.exports.sendFinancials = async (req,res) => {
     const stock = await Stock.findById(req.params.id);
     const financials = await stock.financialInfo;
     res.send(financials);
-}
+};
+
+module.exports.sendDTE = async (req,res) => {
+    const stock = await Stock.findById(req.params.id);
+    const DTE = await stock.debtToEbitda;
+    res.send(DTE);
+};
 
 module.exports.renderEditForm = async (req, res,) => {
     const stock = await Stock.findById(req.params.id);

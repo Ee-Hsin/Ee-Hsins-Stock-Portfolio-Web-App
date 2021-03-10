@@ -27,6 +27,14 @@ const getFinancials = async function() {
     return res.data;
 }
 
+const getDebtToEbitda = async function() {
+    const pathArray = window.location.pathname.split('/');
+    const id = pathArray[2];
+    console.log("made it here");
+    const res = await axios.get(`/portfolio/${id}/getDTE`);
+    return res.data;
+}
+
 //Select ALL card bodies, then loop through them, take their id, and then add the returns to the child elements.
 
 async function addReturnsPriceAndDiscount() {
@@ -118,16 +126,6 @@ async function addFinancials(){
     } else{
         selectedDebtOverEquity.classList.add('debt-bad');
     }
-    //Adds Long Term Debt/Equity:
-    const selectedLongTermDebtOverEquity = document.querySelector('#ltDebtOverEquity');
-    selectedLongTermDebtOverEquity.classList.remove('loading');
-    selectedLongTermDebtOverEquity.innerText = longTermDebtOverEquity;
-
-    if (longTermDebtOverEquity <= 1.00){
-        selectedLongTermDebtOverEquity.classList.add('debt-good');
-    } else{
-        selectedLongTermDebtOverEquity.classList.add('debt-bad');
-    }
 
     //Adds EPS past5Y:
     const selectedEpsPast5Y = document.querySelector('#epsPast5Y');
@@ -144,7 +142,6 @@ async function addFinancials(){
         selectedEpsPast5Y.classList.add("returns-negative");
     }
 
-
     //Chart Historical EPS:
     historicalEps.reverse();
     const dates = historicalEps.map((x)=>{
@@ -155,6 +152,18 @@ async function addFinancials(){
     })
     chartEps(eps,dates); //this function is in the chartingData JavaScript file.
 
+    //Adds Debt-To-Ebitda Ratio:
+    const { DTE } = await getDebtToEbitda();
+
+    const selectedDTE = document.querySelector('#DTE');
+    selectedDTE.classList.remove('loading');
+    selectedDTE.innerText = DTE;
+
+    if (DTE <= 3.00){
+        selectedDTE.classList.add('debt-good');
+    } else{
+        selectedDTE.classList.add('debt-bad');
+    }
 }
 
 addReturnsPriceAndDiscount();

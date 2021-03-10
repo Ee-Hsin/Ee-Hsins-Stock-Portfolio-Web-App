@@ -149,7 +149,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', { err }) //rendering an error template.
 })
 
-app.listen(3005, () => {
+app.listen(3000, () => {
     console.log("LISTENING ON PORT 3005");
 })
 

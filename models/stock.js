@@ -153,5 +153,24 @@ StockSchema.virtual('financialInfo').get(async function(){
 
 })
 
+StockSchema.virtual('debtToEbitda').get(async function(){
+
+    try{
+        //This gets the Debt-to-Ebitda (should move it to its own virtual)
+        let {data} = await axios.get(`https://www.gurufocus.com/stock/${this.ticker}/summary?search=${this.ticker}`);
+        const debtToEbitaLocation = data.search('Debt-to-EBITDA')
+        data = data.substring(debtToEbitaLocation,debtToEbitaLocation + 160);
+        const figureLocation = data.search('<td data-v-d8b0497c>') + '<td data-v-d8b0497c>'.length+1;
+        const debtToEbitda = data.slice(figureLocation,data.search(' </td>'));
+
+        const returnedItem = {DTE: parseFloat(debtToEbitda)} || {DTE:"Error"};
+        return returnedItem;
+
+    } catch (e){
+        return {DTE:"Error"};
+    }
+
+})
+
 
 module.exports = mongoose.model('Stock', StockSchema);
