@@ -20,6 +20,13 @@ const getIV = async function(){
     return res.data;
 }
 
+const getFinancials = async function() {
+    const pathArray = window.location.pathname.split('/');
+    const id = pathArray[2];
+    const res = await axios.get(`/portfolio/${id}/getFinancials`);
+    return res.data;
+}
+
 //Select ALL card bodies, then loop through them, take their id, and then add the returns to the child elements.
 
 async function addReturnsPriceAndDiscount() {
@@ -81,4 +88,74 @@ async function addReturnsPriceAndDiscount() {
     }
 }
 
+//Add all the financials, and call the chartEps function
+async function addFinancials(){
+    const {currentRatio, debtOverEquity, longTermDebtOverEquity, returnOnEquity, epsPast5Y, historicalEps} = await getFinancials();
+    
+    //Adds ROE:
+    const selectedROE = document.querySelector('#ROE');
+    selectedROE.classList.remove('loading');
+    selectedROE.classList.add('ROE');
+    selectedROE.innerText = returnOnEquity;
+    //Adds Current Ratio:
+    const selectedCurrentRatio = document.querySelector('#currentRatio')
+    selectedCurrentRatio.classList.remove('loading');
+    selectedCurrentRatio.innerText = currentRatio;
+
+    if (currentRatio > 1){
+        selectedCurrentRatio.classList.add('debt-good');
+    } else{
+        selectedCurrentRatio.classList.add('debt-bad');
+    }
+
+    //Adds Debt/Equity:
+    const selectedDebtOverEquity = document.querySelector('#debtOverEquity');
+    selectedDebtOverEquity.classList.remove('loading');
+    selectedDebtOverEquity.innerText = debtOverEquity;
+
+    if (debtOverEquity <= 1.50){
+        selectedDebtOverEquity.classList.add('debt-good');
+    } else{
+        selectedDebtOverEquity.classList.add('debt-bad');
+    }
+    //Adds Long Term Debt/Equity:
+    const selectedLongTermDebtOverEquity = document.querySelector('#ltDebtOverEquity');
+    selectedLongTermDebtOverEquity.classList.remove('loading');
+    selectedLongTermDebtOverEquity.innerText = longTermDebtOverEquity;
+
+    if (longTermDebtOverEquity <= 1.00){
+        selectedLongTermDebtOverEquity.classList.add('debt-good');
+    } else{
+        selectedLongTermDebtOverEquity.classList.add('debt-bad');
+    }
+
+    //Adds EPS past5Y:
+    const selectedEpsPast5Y = document.querySelector('#epsPast5Y');
+    selectedEpsPast5Y.classList.remove('loading');
+    selectedEpsPast5Y.innerText = epsPast5Y;
+
+    if (epsPast5Y >= 5.0){
+        selectedEpsPast5Y.innerText = "+" + epsPast5Y + "%";
+        selectedEpsPast5Y.classList.add("returns-positive");
+    } else if (epsPast5Y >= 0){
+        selectedEpsPast5Y.innerText = epsPast5Y + "%";
+        selectedEpsPast5Y.classList.add("returns-neutral");
+    } else {
+        selectedEpsPast5Y.classList.add("returns-negative");
+    }
+
+
+    //Chart Historical EPS:
+    historicalEps.reverse();
+    const dates = historicalEps.map((x)=>{
+        return x.period;
+    })
+    const eps = historicalEps.map((x)=>{
+        return x.v;
+    })
+    chartEps(eps,dates); //this function is in the chartingData JavaScript file.
+
+}
+
 addReturnsPriceAndDiscount();
+addFinancials();

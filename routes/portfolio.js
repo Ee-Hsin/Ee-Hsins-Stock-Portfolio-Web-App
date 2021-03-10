@@ -34,6 +34,8 @@ router.get('/:id/getCurrentPriceAndReturns', catchAsync(portfolio.sendReturns));
 router.get('/:id/getReturnsYTD', catchAsync(portfolio.sendReturnsYTD));
 //My API Response to client side to send IV data
 router.get('/:id/getIV', catchAsync(portfolio.sendIV));
+//My API Response to client side to send Financial data
+router.get('/:id/getFinancials', catchAsync(portfolio.sendFinancials));
 
 
 // //Error Handler (don't need, handled in app.js)

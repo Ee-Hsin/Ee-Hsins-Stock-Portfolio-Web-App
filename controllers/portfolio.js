@@ -26,9 +26,6 @@ module.exports.showStock = async (req, res) => {
         req.flash('error', 'Cannot find that Stock!');
         return res.redirect('/portfolio')
     }
-    //Adding financials to stock
-    stock.financials = await stock.financialInfo;
-
     res.render('portfolio/show', {stock});
 };
 
@@ -55,6 +52,12 @@ module.exports.sendIV = async (req,res) => {
     const IV = await stock.IV;
     res.send(IV);
 };
+
+module.exports.sendFinancials = async (req,res) => {
+    const stock = await Stock.findById(req.params.id);
+    const financials = await stock.financialInfo;
+    res.send(financials);
+}
 
 module.exports.renderEditForm = async (req, res,) => {
     const stock = await Stock.findById(req.params.id);

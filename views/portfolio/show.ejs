@@ -26,7 +26,7 @@
                         <div class="col-md-4 mb-0">
                             <h1><%= stock.name %></h1>
                         </div>
-                        <div class="col-md-5 col-lg-7 offset-md-1 mt-auto mb-0 ticker">
+                        <div class="col-lg-5 offset-md-1 mt-auto mb-0 ticker">
                             <h2 class="pb-0"> (Ticker: <a href = "https://finance.yahoo.com/quote/<%=stock.ticker%>"><%= stock.ticker %></a>)</h2>
                         </div>
                     </div>
@@ -89,20 +89,16 @@
             <div class="row mb-3 pb-2 bottom-border">
                 <div class="col-md-3">
                     <h3>Return on Equity: </h3>
-                    <h3 class = "ROE"><%=stock.financials.returnOnEquity%></h3>
+                    <h3 class = "loading" id="ROE">Loading...</h3>
                     <details> <summary class = "bottom-border">Criteria for ROE</summary>
                         An ROE of 15% and above is a great business. Though note, some great business (like Mcdonalds and most restaurant
                         companies) will fail this step due to having negative equity as they are taking on lots of LT debt to take 
                         advantage of low interest rates. 
                     </details>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3" >
                     <h3>Current Ratio:</h3>
-                    <% if (stock.financials.currentRatio >= 1){%>
-                        <h3 class = "debt-good"><%=stock.financials.currentRatio%></h3>
-                    <%} else {%> 
-                        <h3 class = "debt-bad"><%=stock.financials.currentRatio%></h3>                        
-                    <% } %> 
+                    <h3 class="loading" id="currentRatio">Loading...</h3>
                     <details> <summary class = "bottom-border">Criteria for Current Ratio</summary>
                         Current Ratio is Current Assets/Current Liabilities, a value over 1 is safe.
                     </details>
@@ -110,11 +106,7 @@
                 <div class="col-md-3">
                     <div class = "mb-2">
                         <h3>Debt/Equity:</h3>
-                        <% if (stock.financials.debtOverEquity <= 1.5){%>
-                            <h3 class = "debt-good"> <%=stock.financials.debtOverEquity%></h3>
-                            <%} else {%> 
-                            <h3 class = "debt-bad"><%=stock.financials.debtOverEquity%></h3>
-                        <% } %> 
+                        <h3 id="debtOverEquity" class="loading">Loading...</h3>
                         <details> <summary class = "bottom-border">Criteria for Debt/Equity</summary>
                             In most cases, it should not exceed 1.50 to be safe, but it more so depends on how good the Debt/EBITDA ratio is.
                             <b>Note:</b> If it is 0.00, check the ROE to see if Equity is Negative. A Debt/Equity ratio fo 0.00, either means the company has no debt,
@@ -124,14 +116,10 @@
                 </div>
                 <div class="col-md-3">
                     <div class = "mb-2">
-                        <h3>Debt/Equity:</h3>
-                        <% if (stock.financials.debtOverEquity <= 1.5){%>
-                            <h3 class = "debt-good"> <%=stock.financials.debtOverEquity%></h3>
-                            <%} else {%> 
-                            <h3 class = "debt-bad"><%=stock.financials.debtOverEquity%></h3>
-                        <% } %> 
+                        <h3>LT Debt/Equity:</h3>
+                        <h3 id="ltDebtOverEquity" class="loading">Loading...</h3>
                         <details> <summary class = "bottom-border">Criteria for Debt/Equity</summary>
-                            In most cases, it should not exceed 1.50 to be safe, but it more so depends on how good the Debt/EBITDA ratio is.
+                            In most cases, it should not exceed 1.0 to be safe, but it more so depends on how good the Debt/EBITDA ratio is.
                         </details>
                     </div>
                 </div>
@@ -139,13 +127,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <h3 class = "returns-label">EPS Growth Past 5Y:</h3>
-                        <% if (stock.financials.epsPast5Y >= 5.0){%>
-                        <h3 class = "returns-positive">+<%=stock.financials.epsPast5Y%>%</h3>
-                        <%} else if (stock.financials.epsPast5Y > 0){%> 
-                        <h3 class = "returns-neutral">+<%=stock.financials.epsPast5Y%>%</h3>
-                        <% } else {%> 
-                        <h3 class = "returns-negative"><%=stock.financials.epsPast5Y%>%</h3>
-                        <% } %> 
+                    <h3 id="epsPast5Y" class="loading">Loading...</h3>
                     <details> <summary class = "bottom-border">Criteria for Historical EPS Growth</summary>
                         This really depends on the individual Company. If we're looking at a Large Cap Growth Company, historical earnings growth (in most cases) should be 15%+.
                         If it is a Large Cap Predictable, making it more defensive, anything from 5 to 10% is reasonable. 
@@ -178,8 +160,8 @@
         crossorigin="anonymous"></script>
         
     <script src="/javascripts/validateForms.js"></script>
-    <script src="/javascripts/chartingData.js"></script>
     <script src="/javascripts/loadingData.js"></script>
+    <script src="/javascripts/chartingData.js"></script>
 
 </body>
 

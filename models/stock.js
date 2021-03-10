@@ -121,14 +121,21 @@ StockSchema.virtual('financialInfo').get(async function(){
     try{
         const res = await axios.get(`https://finnhub.io/api/v1/stock/metric?symbol=${this.ticker}&metric=all&token=${process.env.FINNHUB_API_KEY}`);
         const currentRatio = res.data.metric.currentRatioQuarterly && res.data.metric.currentRatioQuarterly.toFixed(2);
-        const debtOverEquity = res.data.metric["totalDebt/totalEquityQuarterly"] && (res.data.metric["totalDebt/totalEquityQuarterly"]/100).toFixed(2);
-        const longTermDebtOverEquity = res.data.metric["longTermDebt/equityQuarterly"] && (res.data.metric["longTermDebt/equityQuarterly"]/100).toFixed(2);
+        let debtOverEquity = res.data.metric["totalDebt/totalEquityQuarterly"] && (res.data.metric["totalDebt/totalEquityQuarterly"]/100).toFixed(2);
+        let longTermDebtOverEquity = res.data.metric["longTermDebt/equityQuarterly"] && (res.data.metric["longTermDebt/equityQuarterly"]/100).toFixed(2);
         let returnOnEquity = res.data.metric.roeRfy;
         if (!returnOnEquity){
             returnOnEquity = "Negative Equity"
         } else{
             returnOnEquity = returnOnEquity.toFixed(2) +"%";
         }
+
+        if (!debtOverEquity){
+            debtOverEquity = "Negative Equity";
+        } 
+        if (!longTermDebtOverEquity){
+            longTermDebtOverEquity = "Negative Equity";
+        } 
 
         let epsPast5Y = res.data.metric.epsGrowth5Y;
         if (!epsPast5Y){
