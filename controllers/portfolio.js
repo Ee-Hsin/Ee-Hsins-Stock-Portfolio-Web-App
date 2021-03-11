@@ -66,6 +66,18 @@ module.exports.sendDTE = async (req,res) => {
     res.send(DTE);
 };
 
+module.exports.sendIndiPortfolioAllocation = async(req,res) =>{
+    const stock = await Stock.findById(req.params.id);
+    const totalNetLiquidation = await Stock.totalNetLiquidation();
+    const indiNetLiquidation = await stock.individualLiquidation;
+    let percentNetLiquidation = indiNetLiquidation/totalNetLiquidation;
+    percentNetLiquidation *= 100;
+    percentNetLiquidation = percentNetLiquidation.toFixed(2);
+
+    res.send({ stockAllocation : percentNetLiquidation});
+}
+
+
 module.exports.renderEditForm = async (req, res,) => {
     const stock = await Stock.findById(req.params.id);
     if (!stock){

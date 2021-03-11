@@ -35,6 +35,13 @@ const getDebtToEbitda = async function() {
     return res.data;
 }
 
+const getPortfolioAllocation = async function() {
+    const pathArray = window.location.pathname.split('/');
+    const id = pathArray[2];
+    const res = await axios.get(`/portfolio/${id}/getIndiPortfolioAllocation`);
+    return res.data;
+}
+
 //Select ALL card bodies, then loop through them, take their id, and then add the returns to the child elements.
 
 async function addReturnsPriceAndDiscount() {
@@ -166,5 +173,15 @@ async function addFinancials(){
     }
 }
 
+async function addPortfolioAllocation(){
+    const {stockAllocation} = await getPortfolioAllocation();
+    const selectedPortfolioAllocation = document.querySelector('#portfolioAllocation')
+    selectedPortfolioAllocation.classList.remove('loading');
+    selectedPortfolioAllocation.classList.add('portfolio-allocation');
+    selectedPortfolioAllocation.innerText = stockAllocation + "%";
+
+}
+
+addPortfolioAllocation();
 addReturnsPriceAndDiscount();
 addFinancials();

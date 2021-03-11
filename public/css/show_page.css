@@ -78,17 +78,17 @@ h2 a:link {
 }
 
 .returns-positive{
-    font-size: calc(2.5rem + 2.3vw);
+    font-size: calc(2.2rem + 2.1vw);
     color: #206303;
 }
 
 .returns-neutral{
-    font-size: calc(2.5rem + 2.3vw);
+    font-size: calc(2.2rem + 2.1vw);
     color: #15290d;
 }
 
 .returns-negative{
-    font-size: calc(2.5rem + 2.3vw);
+    font-size: calc(2.2rem + 2.1vw);
     color: #b51a28;
 }
 
@@ -135,4 +135,9 @@ h2 a:link {
     font-size: calc(1.2rem + 0.2vw);
     font-weight: 700;
     color:rgb(155, 100, 19)
+}
+
+.portfolio-allocation{
+    font-size: calc(2rem + 1.3vw);
+    color: #15290d;
 }

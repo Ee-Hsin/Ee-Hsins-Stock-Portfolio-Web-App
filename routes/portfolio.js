@@ -38,6 +38,9 @@ router.get('/:id/getIV', catchAsync(portfolio.sendIV));
 router.get('/:id/getFinancials', catchAsync(portfolio.sendFinancials));
 //My API Response to client side to send DebtToEbitda
 router.get('/:id/getDTE', catchAsync(portfolio.sendDTE));
+//My API Response to client side to send Net Liquidation
+router.get('/:id/getIndiPortfolioAllocation', catchAsync(portfolio.sendIndiPortfolioAllocation));
+
 
 
 // //Error Handler (don't need, handled in app.js)

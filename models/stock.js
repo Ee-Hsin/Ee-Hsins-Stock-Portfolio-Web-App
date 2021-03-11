@@ -170,7 +170,40 @@ StockSchema.virtual('debtToEbitda').get(async function(){
         return {DTE:"Error"};
     }
 
+});
+
+StockSchema.virtual('individualLiquidation').get(async function(){
+    try{
+        console.log("I'm IN Individual Liquidation!");
+        let units = this.units;
+        let {currPrice} = await this.currentPriceAndReturns;
+        let indiStockNetLiquidation = currPrice * units;
+        console.log("I'm OUT of Individual Liquidation!");
+        console.log(indiStockNetLiquidation.toFixed(2));
+
+        return indiStockNetLiquidation.toFixed(2);
+    }catch(e){
+        throw new ExpressError("Had trouble finding stock's individual liquidation", 404)
+    }
 })
 
+StockSchema.statics.totalNetLiquidation = async function () {
+    try{
+        console.log("I'm IN!");
+        const allStocks = await this.find({}).exec();
+        let sumNetLiquidation = 0;
+        for (let stock of allStocks){
+            let units = stock.units;
+            let {currPrice} = await stock.currentPriceAndReturns;
+            let indiStockNetLiquidation = currPrice * units;
+            sumNetLiquidation += indiStockNetLiquidation;
+        }
+        console.log(sumNetLiquidation.toFixed(0));
+        return sumNetLiquidation;
+
+    } catch(e){
+        throw new ExpressError("There has been an error obtaining total Net Liquidation", 404);
+    }   
+};
 
 module.exports = mongoose.model('Stock', StockSchema);
