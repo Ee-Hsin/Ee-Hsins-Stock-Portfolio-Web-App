@@ -1,5 +1,5 @@
 .guide{
-    background: rgb(92, 49, 49);
+    background: #b6aeb5;
     background-size: cover;
     background-position: center;
 }
@@ -12,17 +12,18 @@ ul{
     list-style: none;
     height: 100%;
     width: 100%;
-    padding-top: 0rem;
-    padding-right: 0.5rem;
-    background: rgb(138, 126, 20);
+    padding-top: 0.5rem;
+    padding-right: 0;
+    padding-left:0;
+    background-color: #13315C;
     box-shadow: 2px 0px 5px black;
     display:flex;
     justify-content: space-evenly;
 }
 
 ul li{
-    margin: 5px;
-    padding: 5px;
+    margin: 0.2vw;
+    padding: 0.2vw;
 }
 
 ul li a{
@@ -36,4 +37,88 @@ ul li a{
 ul li a:hover{
     background: rgb(250, 162, 29);
     color: white;
+}
+
+@media (max-width: 701px){
+    ul{
+        flex-direction: column;
+    }
+    ul li{
+        display: inline;
+    };
+}
+
+.card{
+    margin-bottom: 2%;
+    border: 0px;
+}
+
+.card-title{
+    font-weight: 700;
+}
+
+.card-body{
+    background-color: #EEF4ED;
+}
+
+.card-header{
+    background-color: #8DA9C4;
+}
+
+blockquote{
+    border: #8da9c4 solid 2px;
+}
+
+blockquote p{
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    font-size: 2rem;
+}
+
+.blockquote-footer{
+    text-align: center;
+    padding-bottom: 0rem;
+}
+
+.bottom-border{
+    border-bottom: rgba(105, 134, 139, 0.8) solid 0.1rem;
+    width: 20%;
+}
+
+details{
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: .5em;
+    margin-left: 0.2rem;
+}
+
+details:hover{
+    background-color: #b0cce6;
+}
+
+details[open] {
+    padding: .5em;
+    background-color: #b0d5f8;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+details[open] summary {
+    border-bottom: 1px solid #aaa;
+    margin-bottom: .5em;
+}
+
+.card{
+    font-size: 1.2rem;
+}
+
+.card li{
+    margin-bottom: 0.5rem;
+}
+
+li b{
+    border-bottom: solid rgb(147, 184, 187);
+}
+
+img {
+    width: 100%;
 }
