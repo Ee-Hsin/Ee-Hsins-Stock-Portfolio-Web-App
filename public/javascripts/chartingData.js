@@ -69,7 +69,9 @@ function chartEps(eps,dates){
 async function getPriceChartData() {
     const pathArray = window.location.pathname.split('/');
     const id = pathArray[2];
+    console.log('In!')
     const res = await axios.get(`/portfolio/${id}/getChartData`);
+    console.log('Out!')
     chartPrices(res.data.prices,res.data.dates);
 }
 
