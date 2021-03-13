@@ -17,6 +17,9 @@ router.route('/')
 
 router.get('/new', isLoggedIn, isAdmin, portfolio.renderNewStockForm);
 
+//My API Response to client side to send Total Returns
+router.get('/getTotalReturns', catchAsync(portfolio.sendTotalReturns));
+
 router.route('/:id')
     .get(catchAsync(portfolio.showStock))
     .put(isLoggedIn, isAdmin, upload.array('image'), validateStock, catchAsync(portfolio.updateStock))
@@ -40,7 +43,6 @@ router.get('/:id/getFinancials', catchAsync(portfolio.sendFinancials));
 router.get('/:id/getDTE', catchAsync(portfolio.sendDTE));
 //My API Response to client side to send Net Liquidation
 router.get('/:id/getIndiPortfolioAllocation', catchAsync(portfolio.sendIndiPortfolioAllocation));
-
 
 
 // //Error Handler (don't need, handled in app.js)

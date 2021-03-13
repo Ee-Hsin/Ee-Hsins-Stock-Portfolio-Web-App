@@ -77,6 +77,11 @@ module.exports.sendIndiPortfolioAllocation = async(req,res) =>{
     res.send({ stockAllocation : percentNetLiquidation});
 }
 
+module.exports.sendTotalReturns = async(req,res) =>{
+    const totalReturns = await Stock.totalReturns();
+    res.send({totalReturns});
+}
+
 
 module.exports.renderEditForm = async (req, res,) => {
     const stock = await Stock.findById(req.params.id);

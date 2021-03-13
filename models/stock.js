@@ -198,4 +198,28 @@ StockSchema.statics.totalNetLiquidation = async function () {
     }   
 };
 
+//I could have put this as part of the totalNetLiquidation above, and return two variables with an object up there.
+//but there was never a scenario where I would use both totalNetLiquidation and total returns, so no point in doing that. Might as well keep it seperate.
+StockSchema.statics.totalReturns = async function() {
+    try{
+        const allStocks = await this.find({}).exec();
+        let sumCashSpent = 0;
+        let sumNetLiquidation = 0;
+        for (let stock of allStocks){
+            let units = stock.units;
+            let avgPrice = stock.price;
+            let {currPrice} = await stock.currentPriceAndReturns;
+
+            let indiStockCashSpent = avgPrice * units;
+            let indiStockNetLiquidation = currPrice * units;
+            sumCashSpent += indiStockCashSpent;
+            sumNetLiquidation += indiStockNetLiquidation;
+        }
+        return ((sumNetLiquidation/sumCashSpent) *100).toFixed(2);
+
+    } catch(e){
+        throw new ExpressError("There has been an error obtaining total returns", 404);
+    }
+}
+
 module.exports = mongoose.model('Stock', StockSchema);

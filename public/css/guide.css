@@ -8,6 +8,36 @@ html{
     scroll-behavior: smooth;
 }
 
+@keyframes blink {
+    0%{
+        border: 3px rgb(209, 142, 18) solid;
+    }
+    50%{
+        border: 3px rgb(38, 67, 109) solid;
+    }
+    80%{
+        border: 3px rgb(148, 165, 189) solid;
+    }
+    100%{
+        border: 3px rgb(207, 146, 15) solid;
+    }
+}
+
+#importantNote{
+    color: white;
+    padding: 0.8rem;
+    text-align: center;
+    background-color: rgb(15, 40, 75);
+    border-width: 5px;
+    animation: blink 3s infinite;
+}
+
+#importantNote:hover{
+    border-radius: 1%;
+    animation: none;
+    border: 2px solid rgb(241, 198, 118);
+}
+
 ul{
     list-style: none;
     height: 100%;

@@ -118,6 +118,18 @@ body.register-or-login{
     border: none;
 }
 
+.returns-positive{
+    color: #4ca54c;
+}
+
+.returns-negative{
+    color: #b51a28;
+}
+
+.loading{
+    color: #84898a;
+}
+
 @media (max-width: 276px){
     h1{
         display: none;

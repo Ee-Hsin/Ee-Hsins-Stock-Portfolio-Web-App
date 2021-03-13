@@ -25,6 +25,21 @@
                     <% if (currentUser && currentUser._id == adminId) { %>
                         <a href ="/portfolio/new">Add New Stock</a>
                     <% } %>
+                    <div class="card col-md-6 col-lg-3" style="font-size: 1rem">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-body" id ="">
+                                    <h5 class="card-title">Total Returns</h5>
+                                    <p class="card-text">
+                                        The total returns of this entire Portfolio, to learn more, view the Guide.
+                                    </p>
+                                    <p>This may take some time to load (About 5-10 seconds)</p>
+                                    <h2>Total Returns: <b class = "loading" id="totalReturns">Loading...</b></h2>
+                                    <a class="btn btn-primary" href="/guide">View Guide</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <% for (let stock of stocks) {%>
                         <div class="card col-md-6 col-lg-3" style="font-size: 1rem">
                             <div class="row">
@@ -37,7 +52,7 @@
                                         </p>
                                         <p><%= stock.description.split(' ').slice(0,6).join(' ') + '...' %></p>
                                         <!--Run a function here where you take stock.ticker, make a request to API, and then get the returns from there.-->
-                                        <p>My Returns: <b style ="color: #84898a">Loading...</b></p>
+                                        <p>My Returns: <b class="loading">Loading...</b></p>
                                         <a class="btn btn-primary" href="/portfolio/<%=stock._id%>">View <%=stock.name%></a>
                                     </div>
                                 </div>
