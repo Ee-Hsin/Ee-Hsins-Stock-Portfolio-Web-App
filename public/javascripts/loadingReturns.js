@@ -39,6 +39,12 @@ async function addTotalReturns(){
     selectedTotalReturns.classList.remove('loading');
     selectedTotalReturns.innerText = returnsString;
 
+    if (totalReturns >0){
+        selectedTotalReturns.classList.add('returns-positive');
+    } else {
+        selectedTotalReturns.classList.add('returns-negative');
+    }
+
 }
 
 addTotalReturns();

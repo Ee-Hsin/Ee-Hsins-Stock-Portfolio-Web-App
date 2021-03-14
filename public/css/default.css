@@ -126,8 +126,33 @@ body.register-or-login{
     color: #b51a28;
 }
 
+#totalReturns.returns-positive{
+    font-size: calc(1.5rem + 5vw);
+}
+
+#guideLink{
+    width: 100%;
+    background-color: rgb(184, 144, 34);
+}
+
+#guideLink:hover{
+    color: rgb(255, 190, 190);
+    background: rgb(85, 55, 1);
+}
+
 .loading{
     color: #84898a;
+}
+
+#overallReturnsCard{
+    font-size: 1.2rem;
+    border: rgb(187, 122, 2) 5px solid;
+    background: rgba(42, 43, 33, 0.9);
+}
+
+#overallReturnsCard:hover{
+    border: rgb(206, 135, 3) 2px solid;
+
 }
 
 @media (max-width: 276px){
@@ -135,3 +160,4 @@ body.register-or-login{
         display: none;
     }
 }
+

@@ -111,9 +111,11 @@ blockquote p{
 
 .bottom-border{
     border-bottom: rgba(105, 134, 139, 0.8) solid 0.1rem;
-    width: 20%;
 }
 
+summary{
+    width: 50%;
+}
 details{
     border: 1px solid #aaa;
     border-radius: 4px;

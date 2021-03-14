@@ -25,17 +25,17 @@
                     <% if (currentUser && currentUser._id == adminId) { %>
                         <a href ="/portfolio/new">Add New Stock</a>
                     <% } %>
-                    <div class="card col-md-6 col-lg-3" style="font-size: 1rem">
+                    <div class="card col-md-6 col-lg-3" id="overallReturnsCard">
                         <div class="row">
                             <div class="col">
                                 <div class="card-body" id ="">
-                                    <h5 class="card-title">Total Returns</h5>
+                                    <h2 style="font-size:3rem;">Total Returns so Far:</h2>
+                                    <p class="card-text">Takes 5-10 Seconds to Load</p>
+                                    <h2><b class = "loading" id="totalReturns">Loading...</b></h2>
                                     <p class="card-text">
-                                        The total returns of this entire Portfolio, to learn more, view the Guide.
+                                        The total returns of this entire Portfolio, to learn more, view the Guide with the link below
                                     </p>
-                                    <p>This may take some time to load (About 5-10 seconds)</p>
-                                    <h2>Total Returns: <b class = "loading" id="totalReturns">Loading...</b></h2>
-                                    <a class="btn btn-primary" href="/guide">View Guide</a>
+                                    <a class="btn btn-primary" id="guideLink" href="/guide">View Guide</a>
                                 </div>
                             </div>
                         </div>
