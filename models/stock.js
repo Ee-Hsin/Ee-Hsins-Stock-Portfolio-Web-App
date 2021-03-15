@@ -113,10 +113,16 @@ StockSchema.virtual('returnsYTD').get(async function(){
 StockSchema.virtual('financialInfo').get(async function(){
     try{
         const res = await axios.get(`https://finnhub.io/api/v1/stock/metric?symbol=${this.ticker}&metric=all&token=${process.env.FINNHUB_API_KEY}`);
-        const currentRatio = res.data.metric.currentRatioQuarterly && res.data.metric.currentRatioQuarterly.toFixed(2);
+        let currentRatio = res.data.metric.currentRatioQuarterly && res.data.metric.currentRatioQuarterly.toFixed(2);
         let debtOverEquity = res.data.metric["totalDebt/totalEquityQuarterly"] && (res.data.metric["totalDebt/totalEquityQuarterly"]/100).toFixed(2);
         let longTermDebtOverEquity = res.data.metric["longTermDebt/equityQuarterly"] && (res.data.metric["longTermDebt/equityQuarterly"]/100).toFixed(2);
         let returnOnEquity = res.data.metric.roeRfy;
+        if (!currentRatio){
+            currentRatio = "Error";
+        } else{
+            currentRatio = currentRatio.toFixed(2);
+        }
+        
         if (!returnOnEquity){
             returnOnEquity = "Negative Equity"
         } else{
