@@ -25,7 +25,7 @@ async function addReturns(){
             if (stockReturns >0){
                 cardBody.children[4].children[0].classList.add('returns-positive');
             } else {
-                cardBody.children[4].children[0].style.color.add('returns-negative');
+                cardBody.children[4].children[0].classList.add('returns-negative');
             }
         }
     }
