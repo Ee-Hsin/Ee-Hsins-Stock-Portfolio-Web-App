@@ -32,7 +32,11 @@ router.get('/:id/edit', isLoggedIn, isAdmin, catchAsync(portfolio.renderEditForm
 //My API Response to client side to send Candlestick data
 router.get('/:id/getChartData', catchAsync(portfolio.sendChartData));
 //My API Response to client side to send Returns data
-router.get('/:id/getCurrentPriceAndReturns', catchAsync(portfolio.sendReturns));
+router.get('/:id/getCurrentPriceAndReturns', catchAsync(async (req,res) => {
+    const stock = await Stock.findById(req.params.id);
+    const currentPriceAndReturns = await stock.currentPriceAndReturns;
+    res.send(currentPriceAndReturns);
+}));
 //My API Response to client side to send ReturnsYTD data
 router.get('/:id/getReturnsYTD', catchAsync(portfolio.sendReturnsYTD));
 //My API Response to client side to send IV data

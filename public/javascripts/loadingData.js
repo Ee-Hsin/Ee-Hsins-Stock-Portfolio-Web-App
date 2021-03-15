@@ -165,7 +165,7 @@ async function addFinancials(){
     selectedDTE.classList.remove('loading');
     selectedDTE.innerText = DTE;
 
-    if (DTE <= 3.00){
+    if (DTE <= 3.00 && DTE >= 0){
         selectedDTE.classList.add('debt-good');
     } else{
         selectedDTE.classList.add('debt-bad');
