@@ -206,7 +206,7 @@ app.post('/contact', catchAsync( async(req, res) => {
 
 //ERROR HANDLERS
 app.all('*', (req, res, next) => { //If someone goes to a path we didn't handle up there (and hence doesn't exist)
-    req.flash('error', '404, that Page Does not Exist');
+    // req.flash('error', '404, that Page Does not Exist');
     res.redirect('/portfolio')
 })
 
