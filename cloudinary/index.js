@@ -10,7 +10,8 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary,
     params: {
-        folder: 'Stock-Portfolio', //this is where we decide what the folder is on Cloudinary
+        folder: process.env.CLOUDINARY_FOLDER_NAME || 'Stock-Portfolio', //this is where we decide what the folder is on Cloudinary
+        //Folder name is an environment variable on Heroku, will only exist in production. 
         allowedFormats: ['jpeg', 'png', 'jpg']
     }
 });
