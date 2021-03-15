@@ -95,7 +95,7 @@ const sessionConfig = {
     saveUninitialized: true,
     cookie: { //configuring the cookie
         httpOnly: true,
-        //secure: true, //So cookie only works over HTTPS
+        secure: true, //So cookie only works over HTTPS
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
@@ -206,7 +206,7 @@ app.post('/contact', catchAsync( async(req, res) => {
 
 //ERROR HANDLERS
 app.all('*', (req, res, next) => { //If someone goes to a path we didn't handle up there (and hence doesn't exist)
-    // req.flash('error', '404, that Page Does not Exist');
+    // req.flash('error', '404, that Page Does not Exist'); //removed this because it was randomly appearing without redirecting working for some reason
     res.redirect('/portfolio')
 })
 
