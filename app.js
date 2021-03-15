@@ -22,15 +22,18 @@ const userRoutes = require('./routes/users');
 const portfolioRoutes = require('./routes/portfolio');
 const catchAsync = require("./utils/catchAsync");
 
+const MongoDBStore = require('connect-mongo');
+
 /*COMMANDS:
 1. Press CTRL+D while selecting something to select another one, and keep
 pressing to eventualy select all.
 2. Presss SHIFT+ALT+DOWNARROWKEY to duplicate a line below
 3. Press ALT and highlight things to highlight multiple things at once
 */
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/stock-portfolio';
 
 //Connecting to Mongoose Database
-mongoose.connect('mongodb://localhost:27017/stock-portfolio', {
+mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -67,10 +70,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 //To sanitize Query String Injections:
 app.use(mongoSanitize({replaceWith: '_'}))
 
+const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
+
+const store = MongoDBStore.create({
+    mongoUrl: dbUrl,
+    secret,
+    touchAfter: 24 * 60 * 60 //We are lazy updating the session instead of every refresh. This is in seconds (not milliseconds unlike the one down below), so it will update every 24 hrs in this case.
+});
+
+store.on("error", function (e) {
+    console.log("SESSION STORE ERROR", e)
+})
+
 //Setting up session config
 const sessionConfig = {
+    store,
     name: 'session', //the new Session name instead of the default connect.sid
-    secret: 'thisshouldbeabettersecret!',/*Eventually will be an actual secret
+    secret,/*Eventually will be an actual secret
     in production*/
     resave: false,
     saveUninitialized: true,
@@ -80,7 +96,6 @@ const sessionConfig = {
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
-    //store : *Eventually we will make the store a mongo store*
 }
 //Setting up session with the sessionConfig
 app.use(session(sessionConfig))
