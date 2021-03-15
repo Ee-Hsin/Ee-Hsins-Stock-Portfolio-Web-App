@@ -30,6 +30,9 @@ pressing to eventualy select all.
 2. Presss SHIFT+ALT+DOWNARROWKEY to duplicate a line below
 3. Press ALT and highlight things to highlight multiple things at once
 */
+
+//This was we use DB_URL when in production mode, but since we have it in our local .env file, it will use DB_URL in local mode as well.
+//localhost is just a fallback for if we don't have DB_URL in our .env file.
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/stock-portfolio';
 
 //Connecting to Mongoose Database
@@ -213,8 +216,9 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', { err }) //rendering an error template.
 })
 
-app.listen(3000, () => {
-    console.log("LISTENING ON PORT 3005");
+const port = process.env.PORT || 3000; //3000 will run in local development (since PORT doesn't exist in local .env file)
+app.listen(port, () => {
+    console.log("LISTENING ON PORT", port);
 })
 
 //Sort out the Form redirection, then do the .env file next with Key
