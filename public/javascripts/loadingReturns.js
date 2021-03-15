@@ -5,7 +5,6 @@ const getCurrentPriceAndReturns = async function(id){
 
 const getTotalReturns = async function(){
     const res = await axios.get(`/portfolio/getTotalReturns`);
-    console.log(res.data);
     return res.data;
 }
 //Select ALL card bodies, then loop through them, take their id, and then add the returns to the child elements.

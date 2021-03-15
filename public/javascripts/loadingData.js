@@ -30,7 +30,6 @@ const getFinancials = async function() {
 const getDebtToEbitda = async function() {
     const pathArray = window.location.pathname.split('/');
     const id = pathArray[2];
-    console.log("made it here");
     const res = await axios.get(`/portfolio/${id}/getDTE`);
     return res.data;
 }

@@ -15,6 +15,9 @@ const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const sendMail = require('./mail.js');
 
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
+
 const userRoutes = require('./routes/users');
 const portfolioRoutes = require('./routes/portfolio');
 const catchAsync = require("./utils/catchAsync");
@@ -61,14 +64,19 @@ app.use(methodOverride('_method'));
 //Serve static files to client side
 app.use(express.static(path.join(__dirname, 'public')));
 
+//To sanitize Query String Injections:
+app.use(mongoSanitize({replaceWith: '_'}))
+
 //Setting up session config
 const sessionConfig = {
+    name: 'session', //the new Session name instead of the default connect.sid
     secret: 'thisshouldbeabettersecret!',/*Eventually will be an actual secret
     in production*/
     resave: false,
     saveUninitialized: true,
     cookie: { //configuring the cookie
         httpOnly: true,
+        //secure: true, //So cookie only works over HTTPS
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
@@ -78,6 +86,47 @@ const sessionConfig = {
 app.use(session(sessionConfig))
 //Setting up Flash
 app.use(flash()); 
+
+//Using Helmet
+app.use(helmet());
+
+//Configuring our own content security policy
+const scriptSrcUrls = [
+    "https://stackpath.bootstrapcdn.com/",
+    "https://cdn.jsdelivr.net",
+    "https://cdnjs.cloudflare.com/",
+];
+const styleSrcUrls = [
+    "https://stackpath.bootstrapcdn.com/",
+    "https://fonts.googleapis.com/",
+];
+const connectSrcUrls = [];
+const fontSrcUrls = [
+    "https://fonts.gstatic.com",
+    "https://fonts.googleapis.com/",
+];
+
+
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: [],
+            connectSrc: ["'self'", ...connectSrcUrls],
+            scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+            styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+            workerSrc: ["'self'", "blob:"],
+            objectSrc: [],
+            imgSrc: [
+                "'self'",
+                "blob:",
+                "data:",
+                "https://res.cloudinary.com/dgieekvvm/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
+                "https://images.unsplash.com/",
+            ],
+            fontSrc: ["'self'", ...fontSrcUrls],
+        },
+    })
+);
 
 //This middleware is required for Express and Connect-Based applications 
 app.use(passport.initialize());

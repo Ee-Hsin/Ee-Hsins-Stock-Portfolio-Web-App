@@ -1,8 +1,3 @@
-// if (process.env.NODE_ENV !== "production") {
-//     require('dotenv').config();
-// }
-//I guess I don't need it, I only need to put it one time on my app.js page I think
-
 //Yahoo stock prices
 const yahooStockPrices = require('yahoo-stock-prices');
 
@@ -215,7 +210,7 @@ StockSchema.statics.totalReturns = async function() {
             sumCashSpent += indiStockCashSpent;
             sumNetLiquidation += indiStockNetLiquidation;
         }
-        return ((sumNetLiquidation/sumCashSpent) *100).toFixed(2);
+        return ((sumNetLiquidation/sumCashSpent -1) *100).toFixed(2);
 
     } catch(e){
         throw new ExpressError("There has been an error obtaining total returns", 404);
