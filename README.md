@@ -9,12 +9,12 @@ You can access the website at https://ee-hsins-stock-portfolio.herokuapp.com/
 Here are some screenshots dated 16th March 2021:
 
 The home page:
-<img src="readme_images/homePageScreenShot.jpg" width = "200" height = "10">
+<img src="readme_images/homePageScreenshot.JPG">
 The portfolio Index page:
-<img src="readme_images/portfolioPageScreenshot.jpg" width = "200" height = "10">
+<img src="readme_images/portfolioPageScreenshot.JPG">
 The individual stock page:
-<img src="readme_images/individualStockScreenShot.jpg" width = "200" height = "10">
+<img src="readme_images/individualStockScreenshot.JPG">
 The individual stock's financial section page:
-<img src="readme_images/individualStockFinancialsScreenShot.jpg" width = "200" height = "10">
+<img src="readme_images/individualStockFinancialsScreenshot.JPG">
 The contact me page:
-<img src="readme_images/contactPageScreenshot.jpg" width = "200" height = "10">
+<img src="readme_images/contactPageScreenshot.JPG">
