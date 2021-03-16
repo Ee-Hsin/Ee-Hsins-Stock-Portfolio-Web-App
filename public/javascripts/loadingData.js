@@ -145,6 +145,7 @@ async function addFinancials(){
         selectedEpsPast5Y.innerText = epsPast5Y + "%";
         selectedEpsPast5Y.classList.add("returns-neutral");
     } else {
+        selectedEpsPast5Y.innerText = epsPast5Y + "%";
         selectedEpsPast5Y.classList.add("returns-negative");
     }
 
