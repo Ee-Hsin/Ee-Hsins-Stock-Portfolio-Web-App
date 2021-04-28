@@ -1,7 +1,6 @@
 const { stockSchema } = require('./schemas.js');//requiring at the top
 const ExpressError = require('./utils/ExpressError');
 
-
 module.exports.validateStock = (req, res, next) => {
     const { error } = stockSchema.validate(req.body);//We extract {error} from
     //the campgroundSchema Joi schema's .validate() function to validate that the info passed in fits our schema.

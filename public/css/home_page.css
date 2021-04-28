@@ -18,7 +18,6 @@ nav{
     margin-left: 1rem;
     border-bottom: 0.25rem solid transparent;
     font-size: 1.3rem;
-
 }
 
 .nav-link:hover{
@@ -30,7 +29,30 @@ nav{
 .nav-link.active {
     color: white;
     border-bottom-color:white;
+}
 
+.image-loader1{
+    position: absolute; 
+    left: 0; 
+    bottom: 0; 
+    visibility: hidden;
+    background-image: url('/images/home_page_picture2.jpg');
+}
+
+.image-loader2{
+    position: absolute; 
+    left: 0; 
+    bottom: 0; 
+    visibility: hidden;
+    background-image: url('/images/home_page_picture.jpg');
+}
+
+.image-loader3{
+    position: absolute; 
+    left: 0; 
+    bottom: 0; 
+    visibility: hidden;
+    background-image: url('/images/home_page_picture3.jpg');
 }
 
 @keyframes animate{

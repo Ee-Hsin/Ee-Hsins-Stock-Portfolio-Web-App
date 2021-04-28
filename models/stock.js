@@ -59,11 +59,8 @@ StockSchema.virtual('currentPriceAndReturns').get (async function () {
     try{
         // const res = await axios.get(`https://sandbox.iexapis.com/stable/stock/${this.ticker}/quote/latestPrice?token=${process.env.IEX_CLOUD_SANDBOX_KEY}`);
         // const currPrice = res.data;
-        console.log("Stock:", this.ticker);
         const currPrice = await yahooStockPrices.getCurrentPrice(this.ticker); //Yahoo is much faster and we don't have to worry about using tokens.
-        console.log("Current Price", currPrice);
         const stockReturns = (100*(currPrice / this.price) -100).toFixed(2);
-        console.log("Stock returns", stockReturns);
         return {currPrice, stockReturns};
     } catch(e){
         throw new ExpressError(`There has been an error obtaining current prices. Error message is: ${e}`, 404);
@@ -190,9 +187,7 @@ StockSchema.statics.totalNetLiquidation = async function () {
         let sumNetLiquidation = 0;
         for (let stock of allStocks){
             let units = stock.units;
-            console.log("before the price")
             let {currPrice} = await stock.currentPriceAndReturns;
-            console.log("I got the price of", stock.ticker)
             let indiStockNetLiquidation = currPrice * units;
             sumNetLiquidation += indiStockNetLiquidation;
         }
@@ -207,7 +202,6 @@ StockSchema.statics.totalNetLiquidation = async function () {
 //but there was never a scenario where I would use both totalNetLiquidation and total returns, so no point in doing that. Might as well keep it seperate.
 StockSchema.statics.totalReturns = async function() {
     try{
-        console.log("In")
         const allStocks = await this.find({}).exec();
         let sumCashSpent = 0;
         let sumNetLiquidation = 0;
@@ -220,10 +214,7 @@ StockSchema.statics.totalReturns = async function() {
             let indiStockNetLiquidation = currPrice * units;
             sumCashSpent += indiStockCashSpent;
             sumNetLiquidation += indiStockNetLiquidation;
-            console.log(sumCashSpent);
-            console.log(sumNetLiquidation);
         }
-        console.log("Out");
         return ((sumNetLiquidation/sumCashSpent -1) *100).toFixed(2);
 
     } catch(e){
