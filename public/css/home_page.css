@@ -110,17 +110,6 @@ body {
     transition: 0.25s;
 }
 
-/* #website_description{
-    background-color: black;
-    padding-top: 1.2rem ;
-    padding-bottom: 1.2rem ;
-} */
-
-#website_description:hover{
-    color: rgb(255, 182, 46);
-}
-
-
 @media (max-width: 270px){
     #website_description {
         display: none;
