@@ -11,6 +11,7 @@
         integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Economica:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/guide.css">
     <link rel="stylesheet" href="/css/navbar_footer.css">
 </head>
@@ -20,7 +21,6 @@
     <main class="container-fluid mt-5">
         <%- include('./partials/flash')%>
         <div class="container-fluid main-block p-3">
-            <h3 id="importantNote">This is going to be a boring read. But investing is boring and absent of emotion. So you should get used to it.</h3>
             <div class="row mb-4">
                 <div class="col-md-12">
                     <ul>
@@ -185,38 +185,46 @@
                     <div class="card-body">
                         <h5 class="card-title">Never FOMO, these are principles you should follow when deciding when to buy:</h5>
                         <p class="card-text">
-                            <ol>
-                                <li>Never buy when the Stock is overvalued
-                                    <details> <summary class = "bottom-border">More Info</summary>
-                                        As mentioned in the investing principles section, if you pay too high a price for a great business, it's still a bad investment.
-                                        Generally overvalued means 5-10% more than the intrinsic value you calculated.
-                                    </details>
-                                </li>
-                                <li>Buy when the stock hits a Key Moving Average where it has historically found support.
-                                    <details> <summary class = "bottom-border">More Info</summary>
-                                        The exact moving averages where the stock bounces goes on a stock-to-stock basis, but I generally like to use the 20,40,50,100,150 and 200 moving
-                                        averages as reference. For example, Microsoft typically bounces at the 20EMA on the Weekly chart for normal retracements, and the 50MA during bear
-                                        markets. Knowing this, I'd buy Microsoft every time it hits the 20EMA and is undervalued. And would buy a full allocation when it hits the 50MA. (If I didn't
-                                        already have a full allocation)
-                                        <img src="/images/Microsoft_3_Year_Weekly_Chart.jpg" alt="">
-                                    </details>
-                                </li>
-                                <li>
-                                    Buy in tranches. (Dollar Cost Averaging)
-                                    <details><summary>More Info</summary>
-                                        Generally, it is not a good idea to buy a full allocation into a stock the moment it becomes undervalued and hits a key moving average. What is best,
-                                        is to have a planned allocation for a stock. So, if you have 20 stocks in your $10,000 portfolio, then you can allocate $500 to each stock. And you can
-                                        buy $125(1/4) worth of a stock when it hits a key moving average, if it continues to fall to the next level, you can add another (1/4) of a position and so
-                                        on, until you have a full position. 
-                                    </details>
-                                </li>
-                            </ol>
-                            <blockquote class="blockquote mb-0">
-                                <p>
-                                    “If you can’t convince yourself “When I’m down 25 percent, I’m a buyer” and banish forever the fatal thought 
-                                    “When I’m down 25 percent, I’m a seller,” then you’ll never make a decent profit in stocks.”</p>
-                                <footer class="blockquote-footer">Peter Lynch in<cite title="Source Title"> One Up On Wall Street</cite></footer>
-                            </blockquote>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ol>
+                                        <li>Never buy when the Stock is overvalued
+                                            <details> <summary class = "bottom-border">More Info</summary>
+                                                As mentioned in the investing principles section, if you pay too high a price for a great business, it's still a bad investment.
+                                                Generally overvalued means 5-10% more than the intrinsic value you calculated.
+                                            </details>
+                                        </li>
+                                        <li>Buy when the stock hits a Key Moving Average where it has historically found support.
+                                            <details> <summary class = "bottom-border">More Info</summary>
+                                                The exact moving averages where the stock bounces goes on a stock-to-stock basis, but I generally like to use the 20,40,50,100,150 and 200 moving
+                                                averages as reference. For example, Microsoft typically bounces at the 20EMA on the Weekly chart for normal retracements, and the 50MA during bear
+                                                markets. Knowing this, I'd buy Microsoft every time it hits the 20EMA and is undervalued. And would buy a full allocation when it hits the 50MA. (If I didn't
+                                                already have a full allocation)
+                                                <img src="/images/Microsoft_3_Year_Weekly_Chart.jpg" alt="">
+                                            </details>
+                                        </li>
+                                        <li>
+                                            Buy in tranches. (Dollar Cost Averaging)
+                                            <details><summary>More Info</summary>
+                                                Generally, it is not a good idea to buy a full allocation into a stock the moment it becomes undervalued and hits a key moving average. What is best,
+                                                is to have a planned allocation for a stock. So, if you have 20 stocks in your $10,000 portfolio, then you can allocate $500 to each stock. And you can
+                                                buy $125(1/4) worth of a stock when it hits a key moving average, if it continues to fall to the next level, you can add another (1/4) of a position and so
+                                                on, until you have a full position. 
+                                            </details>
+                                        </li>
+                                    </ol>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="blockquote-container">
+                                        <blockquote class="blockquote mb-0">
+                                            <p>
+                                                “If you can’t convince yourself “When I’m down 25 percent, I’m a buyer” and banish forever the fatal thought 
+                                                “When I’m down 25 percent, I’m a seller,” then you’ll never make a decent profit in stocks.”</p>
+                                            <footer class="blockquote-footer">Peter Lynch in<cite title="Source Title"> One Up On Wall Street</cite></footer>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                            </div>
                         </p>
                     </div>
                 </div>
