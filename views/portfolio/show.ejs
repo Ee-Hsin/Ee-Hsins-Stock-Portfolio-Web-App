@@ -77,15 +77,15 @@
                         <div class = "mb-2 bottom-border">
                             <h3>Stock Category: <b><%=stock.category%></b></h3>
                         </div>
-                        <div class="">
+                        <div class="description-title">
                             <h3>Description:</h3>
                         </div>
-                        <div class="">
+                        <div class="description">
                             <p><%= stock.description %></h3>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-7 price-chart">
                     <h3>Last 52 Weekly Closing Prices</h3>
                     <canvas class = "mr-auto" id="priceChart" height = "60" width = "60"></canvas>
                 </div>

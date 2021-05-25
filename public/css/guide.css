@@ -1,3 +1,8 @@
+@font-face{
+    src: url(fonts/Lyon-Regular.ttf);
+    font-family: Lyon;
+}
+
 .guide{
     background: #b6aeb5;
     background-size: cover;
@@ -6,21 +11,6 @@
 
 html{
     scroll-behavior: smooth;
-}
-
-@keyframes blink {
-    0%{
-        border: 3px rgb(209, 142, 18) solid;
-    }
-    50%{
-        border: 3px rgb(38, 67, 109) solid;
-    }
-    80%{
-        border: 3px rgb(148, 165, 189) solid;
-    }
-    100%{
-        border: 3px rgb(207, 146, 15) solid;
-    }
 }
 
 ul{
@@ -70,16 +60,30 @@ ul li a:hover{
 }
 
 .card-title{
-    font-weight: 700;
+    font-weight: 500;
+    font-size: calc(1.6rem + 0.3vw);
+    padding-bottom: 1rem;
+    text-decoration: underline 2px #8DA9C4;
+}
+
+.col-md-6 .card-title{
+    padding-left: 10%;
+    max-width: 80%;
+    text-align: center;
+    /* border-bottom: 5px solid red; */
 }
 
 .card-body{
     background-color: #EEF4ED;
 }
 
+.card-body, .card-body *{
+    font-family: Lyon;
+}
+
 .card-header{
     background-color: #8DA9C4;
-    font-size: 3rem;
+    font-size: 3.5rem;
     text-align: center;
 }
 
@@ -120,14 +124,20 @@ blockquote p{
     border-bottom: rgba(105, 134, 139, 0.8) solid 0.1rem;
 }
 
-summary{
-    width: 50%;
+.edu-point{
+    margin-bottom: 0.5rem;
 }
+
+summary{
+    width: 95%;
+}
+
 details{
     border: 1px solid #aaa;
     border-radius: 4px;
     padding: .5em;
     margin-left: 0.2rem;
+    max-width: 200px;
 }
 
 details:hover{
@@ -139,6 +149,7 @@ details[open] {
     background-color: #b0d5f8;
     margin-top: 1em;
     margin-bottom: 1em;
+    max-width: 100%;
 }
 
 details[open] summary {
@@ -155,11 +166,26 @@ details[open] summary {
 }
 
 li b{
-    border-bottom: solid rgb(147, 184, 187);
+    border-bottom: solid 3px #df4802;
 }
 
 img {
     width: 100%;
+}
+
+.chart-wrapper{
+    text-align: center;
+    padding: 3rem;
+    padding-top: 0;
+}
+
+.chart-wrapper h2{
+    margin-bottom: 15px;
+}
+
+#stockCategoryChart{
+    min-width: 200px;
+    min-height: 200px;
 }
 
 @media (max-width: 1250px){
@@ -174,11 +200,19 @@ img {
         max-width: 94%;
         margin-left: 3%;
     }
+    .chart-wrapper{
+        padding: 2rem;
+        padding-top: 0;
+    }
 }
 
 @media (max-width: 767px){
     .card{
         max-width: 98%;
         margin-left: 1%;
+    }
+    .chart-wrapper{
+        padding: 1rem;
+        padding-top: 0;
     }
 }
