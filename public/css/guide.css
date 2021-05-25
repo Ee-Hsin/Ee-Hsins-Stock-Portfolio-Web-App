@@ -161,3 +161,24 @@ li b{
 img {
     width: 100%;
 }
+
+@media (max-width: 1250px){
+    .card{
+        max-width: 90%;
+        margin-left: 5%;
+    }
+}
+
+@media (max-width: 950px){
+    .card{
+        max-width: 94%;
+        margin-left: 3%;
+    }
+}
+
+@media (max-width: 767px){
+    .card{
+        max-width: 98%;
+        margin-left: 1%;
+    }
+}

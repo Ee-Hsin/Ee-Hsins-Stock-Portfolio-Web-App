@@ -92,25 +92,10 @@ body.register-or-login{
     border: solid rgba(221, 118, 45, 0.9);
 }
 
-
-@keyframes blink {
-    0%{
-        border: rgb(209, 142, 18) solid;
-    }
-    50%{
-        border: yellow solid;
-    }
-    80%{
-        border: red solid;
-    }
-    100%{
-        border:rgb(207, 146, 15) solid;
-    }
-}
-
 .card.register-or-login{
-    border-width: 0.5rem;
-    animation: blink 10s infinite;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color:rgba(253, 191, 75, 0.432);
 }
 
 .card.register-or-login:hover{

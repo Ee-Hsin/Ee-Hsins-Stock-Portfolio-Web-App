@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/css/show_page.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-
+    <%- include('../partials/favicon')%>
 </head>
 <body class="d-flex flex-column vh-100">
     <%- include('../partials/navbar')%>
@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div class="col-md-7">
-                    <h3>Last 3 years Weekly Closing Prices</h3>
+                    <h3>Last 52 Weekly Closing Prices</h3>
                     <canvas class = "mr-auto" id="priceChart" height = "60" width = "60"></canvas>
                 </div>
             </div>
