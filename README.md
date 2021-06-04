@@ -1,4 +1,6 @@
-Created a stock portfolio website using a MEN stack and EJS (MEN stands for MongoDB, Express and NodeJS) to showcase the stocks in my portfolio and to track their performance. 
+<h1>Stock Portfolio Web Applciation</h1>
+
+Created a stock portfolio web app using a MEN stack and EJS (MEN stands for MongoDB, Express and NodeJS) to showcase the stocks in my portfolio and to track their performance. 
 Intrinsic values are hidden to non-registered users, I made it so that users have to register so that I could practice using sessions and working with Passport for authentication.
 
 Note: Speed of the API to obtain current prices and current returns will be slower when the market is open due to higher loads on the third party APIS. Markets are open on Weekdays from 9:30am EST to 4:00pm EST. 
