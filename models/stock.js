@@ -222,4 +222,14 @@ StockSchema.statics.totalReturns = async function() {
     }
 }
 
+StockSchema.statics.SP500Returns = async function() {
+    try{
+        const currPrice = await yahooStockPrices.getCurrentPrice('SPY'); //Yahoo is much faster and we don't have to worry about using tokens.
+        const stockReturns = (100*(currPrice / 325) -100).toFixed(2);
+        return stockReturns;
+    } catch (e){    
+        throw new ExpressError("There has been an error obtaining S&P 500 Total returns", 404);
+    }
+}
+
 module.exports = mongoose.model('Stock', StockSchema);

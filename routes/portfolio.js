@@ -19,6 +19,7 @@ router.get('/new', isLoggedIn, isAdmin, portfolio.renderNewStockForm);
 
 //My API Response to client side to send Total Returns
 router.get('/getTotalReturns', catchAsync(portfolio.sendTotalReturns));
+router.get('/getSP500Returns', catchAsync(portfolio.sendSP500Returns));
 
 router.route('/:id')
     .get(catchAsync(portfolio.showStock))

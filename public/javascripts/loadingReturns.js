@@ -7,6 +7,11 @@ const getTotalReturns = async function(){
     const res = await axios.get(`/portfolio/getTotalReturns`);
     return res.data;
 }
+
+const getSP500Returns = async function(){
+    const res = await axios.get(`/portfolio/getSP500Returns`)
+    return res.data;
+}
 //Select ALL card bodies, then loop through them, take their id, and then add the returns to the child elements.
 
 async function addReturns(){
@@ -38,7 +43,7 @@ async function addTotalReturns(){
     selectedTotalReturns.classList.remove('loading');
     selectedTotalReturns.innerText = returnsString;
 
-    if (totalReturns >0){
+    if (parseFloat(totalReturns) >0){
         selectedTotalReturns.classList.add('returns-positive');
     } else {
         selectedTotalReturns.classList.add('returns-negative');
@@ -46,5 +51,20 @@ async function addTotalReturns(){
 
 }
 
+async function addSP500Returns(){
+    const selectedSP500Returns = document.querySelector('#sp500Returns');
+    const {SP500Returns} = await getSP500Returns();
+    const returnsString = SP500Returns + '%';
+    selectedSP500Returns.classList.remove('loading');
+    selectedSP500Returns.innerText = returnsString;
+
+    if (parseFloat(SP500Returns) > 0){
+        selectedSP500Returns.classList.add('returns-positive');
+    } else {
+        selectedSP500Returns.classList.add('returns-negative');
+    }
+}
+
 addTotalReturns();
 addReturns();
+addSP500Returns();

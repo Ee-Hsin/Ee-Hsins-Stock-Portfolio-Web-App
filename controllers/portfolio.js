@@ -82,6 +82,10 @@ module.exports.sendTotalReturns = async(req,res) =>{
     res.send({totalReturns});
 }
 
+module.exports.sendSP500Returns = async(req,res) => {
+    const SP500Returns = await Stock.SP500Returns();
+    res.send({SP500Returns})
+}
 
 module.exports.renderEditForm = async (req, res,) => {
     const stock = await Stock.findById(req.params.id);
