@@ -5,7 +5,7 @@ Intrinsic values are hidden to non-registered users, I made it so that users hav
 
 Note: Speed of the API to obtain current prices and current returns will be slower when the market is open due to higher loads on the third party APIS. Markets are open on Weekdays from 9:30am EST to 4:00pm EST. 
 
-You can access the website at https://ee-hsins-stock-portfolio.herokuapp.com/ 
+You can access the website at https://hsinstocks.com/portfolio
 
 Here are some screenshots dated 16th March 2021:
 
