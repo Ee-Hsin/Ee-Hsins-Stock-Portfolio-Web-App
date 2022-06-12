@@ -55,7 +55,7 @@ async function addReturnsPriceAndDiscount() {
     //If IV is shown, this adds the Discount.
     if (selectedIV){
         const IV = await getIV();
-        const discount = (((parseFloat(IV)/currPrice)-1) * -100).toFixed(2);
+        const discount = (((currPrice/parseFloat(IV))-1) * 100).toFixed(2);
         const selectedDiscount = document.querySelector('#discount');
 
         selectedDiscount.children[0].classList.remove('loading');//LOADING
